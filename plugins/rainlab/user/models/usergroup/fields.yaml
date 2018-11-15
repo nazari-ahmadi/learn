@@ -1,0 +1,19 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: rainlab.user1::lang.group.name
+        span: left
+
+    code:
+        label: rainlab.user1::lang.group.code
+        comment: rainlab.user1::lang.group.code_comment
+        span: right
+        preset: name
+
+    description:
+        label: rainlab.user1::lang.group.description_field
+        type: textarea
+        size: tiny

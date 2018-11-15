@@ -1,0 +1,12 @@
+title = "ارجاع به مامور پست"
+url = "/referral-postman/:id"
+layout = "Users"
+is_hidden = 0
+
+[referralPostman]
+
+[session]
+security = "user"
+redirectNotAllowed = "user/login"
+==
+{% component 'referralPostman' %}

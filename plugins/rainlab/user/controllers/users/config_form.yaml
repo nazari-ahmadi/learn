@@ -1,0 +1,25 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: rainlab.user1::lang.user1.label
+
+# Model Form Field configuration
+form: $/rainlab/user1/models/user1/fields.yaml
+
+# Model Class name
+modelClass: RainLab\User\Models\User
+
+# Default redirect location
+defaultRedirect: rainlab/user1/users
+
+# Create page
+create:
+    redirect: rainlab/user1/users/preview/:id
+    redirectClose: rainlab/user1/users
+
+# Update page
+update:
+    redirect: rainlab/user1/users/update/:id
+    redirectClose: rainlab/user1/users/preview/:id

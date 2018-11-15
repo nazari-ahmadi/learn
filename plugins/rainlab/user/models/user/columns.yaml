@@ -1,0 +1,47 @@
+# ===================================
+#  Column Definitions
+# ===================================
+
+columns:
+
+    id:
+        label: rainlab.user1::lang.user1.id
+        invisible: true
+
+    username:
+        label: rainlab.user1::lang.user1.username
+        searchable: true
+        invisible: true
+
+    first_name:
+        label: rainlab.user1::lang.user1.name
+        searchable: true
+
+    last_name:
+        label: rainlab.user1::lang.user1.surname
+        searchable: true
+
+    national_code:
+        label: rainlab.user1::lang.user1.national_code
+        searchable: true
+
+    mobile:
+        label: rainlab.user1::lang.user1.mobile
+        searchable: true
+
+    email:
+        label: rainlab.user1::lang.user1.email
+        searchable: true
+
+    created_at:
+        label: rainlab.user1::lang.user1.created_at
+        type: timetense
+
+    last_seen:
+        label: rainlab.user1::lang.user1.last_seen
+        type: timetense
+
+    is_guest:
+        label: rainlab.user1::lang.user1.is_guest
+        type: switch
+        invisible: true

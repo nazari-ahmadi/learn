@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: rainlab.user1::lang.group.label
+
+# Model Form Field configuration
+form: $/rainlab/user1/models/usergroup/fields.yaml
+
+# Model Class name
+modelClass: RainLab\User\Models\UserGroup
+
+# Default redirect location
+defaultRedirect: rainlab/user1/usergroups
+
+# Create page
+create:
+    title: rainlab.user1::lang.groups.create_title
+    redirect: rainlab/user1/usergroups/update/:id
+    redirectClose: rainlab/user1/usergroups
+
+# Update page
+update:
+    title: rainlab.user1::lang.groups.update_title
+    redirect: rainlab/user1/usergroups
+    redirectClose: rainlab/user1/usergroups
+
+# Preview page
+preview:
+    title: rainlab.user1::lang.groups.update_title

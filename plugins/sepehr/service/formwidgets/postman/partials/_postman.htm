@@ -1,0 +1,36 @@
+<form>
+    <div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="postman">پستچی</label>
+            <select name="postman" id="postman" class="form-control">
+                <?php foreach ($postmen as $key => $postman): ?>
+                    <option value="<?= $key ?>">
+                        <?= $postman ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+        <div class="form-group col-md-3">
+            <button type="submit"
+                    class="btn btn-primary"
+                    data-request="onReferral"
+                    data-request-update="'list' : '.postman'"
+                    style="margin-top: 25px"
+            >
+                ارجاع
+            </button>
+
+        </div>
+    </div>
+
+
+</form>
+
+
+
+
+<div class="postman">
+    <?= $this->makePartial('list') ?>
+</div>
