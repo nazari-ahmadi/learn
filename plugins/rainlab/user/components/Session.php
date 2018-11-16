@@ -16,20 +16,20 @@ use ApplicationException;
 /**
  * User session
  *
- * This will inject the user1 object to every page and provide the ability for
- * the user1 to sign out. This can also be used to restrict access to pages.
+ * This will inject the user object to every page and provide the ability for
+ * the user to sign out. This can also be used to restrict access to pages.
  */
 class Session extends ComponentBase
 {
     const ALLOW_ALL = 'all';
     const ALLOW_GUEST = 'guest';
-    const ALLOW_USER = 'user1';
+    const ALLOW_USER = 'user';
 
     public function componentDetails()
     {
         return [
-            'name'        => 'rainlab.user1::lang.session.session',
-            'description' => 'rainlab.user1::lang.session.session_desc'
+            'name'        => 'rainlab.user::lang.session.session',
+            'description' => 'rainlab.user::lang.session.session_desc'
         ];
     }
 
@@ -37,26 +37,26 @@ class Session extends ComponentBase
     {
         return [
             'security' => [
-                'title'       => 'rainlab.user1::lang.session.security_title',
-                'description' => 'rainlab.user1::lang.session.security_desc',
+                'title'       => 'rainlab.user::lang.session.security_title',
+                'description' => 'rainlab.user::lang.session.security_desc',
                 'type'        => 'dropdown',
                 'default'     => 'all',
                 'options'     => [
-                    'all'   => 'rainlab.user1::lang.session.all',
-                    'user1'  => 'rainlab.user1::lang.session.users',
-                    'guest' => 'rainlab.user1::lang.session.guests'
+                    'all'   => 'rainlab.user::lang.session.all',
+                    'user'  => 'rainlab.user::lang.session.users',
+                    'guest' => 'rainlab.user::lang.session.guests'
                 ]
             ],
             'allowedUserGroups' => [
-                'title'       => 'rainlab.user1::lang.session.allowed_groups_title',
-                'description' => 'rainlab.user1::lang.session.allowed_groups_description',
+                'title'       => 'rainlab.user::lang.session.allowed_groups_title',
+                'description' => 'rainlab.user::lang.session.allowed_groups_description',
                 'placeholder' => '*',
                 'type'        => 'set',
                 'default'     => []
             ],
             'redirect' => [
-                'title'       => 'rainlab.user1::lang.session.redirect_title',
-                'description' => 'rainlab.user1::lang.session.redirect_desc',
+                'title'       => 'rainlab.user::lang.session.redirect_title',
+                'description' => 'rainlab.user::lang.session.redirect_desc',
                 'type'        => 'dropdown',
                 'default'     => ''
             ],
@@ -110,11 +110,11 @@ class Session extends ComponentBase
             return Redirect::guest($redirectUrl);
         }
 
-        $this->page['user1'] = $this->user();
+        $this->page['user'] = $this->user();
     }
 
     /**
-     * Returns the logged in user1, if available, and touches
+     * Returns the logged in user, if available, and touches
      * the last seen timestamp.
      * @return RainLab\User\Models\User
      */
@@ -132,7 +132,7 @@ class Session extends ComponentBase
     }
 
     /**
-     * Returns the previously signed in user1 when impersonating.
+     * Returns the previously signed in user when impersonating.
      */
     public function impersonator()
     {
@@ -140,7 +140,7 @@ class Session extends ComponentBase
     }
 
     /**
-     * Log out the user1
+     * Log out the user
      *
      * Usage:
      *   <a data-request="onLogout">Sign out</a>
@@ -156,18 +156,18 @@ class Session extends ComponentBase
         Auth::logout();
 
         if ($user) {
-            Event::fire('rainlab.user1.logout', [$user]);
+            Event::fire('rainlab.user.logout', [$user]);
         }
 
         $url = post('redirect', Request::fullUrl());
 
-        Flash::success(Lang::get('rainlab.user1::lang.session.logout'));
+        Flash::success(Lang::get('rainlab.user::lang.session.logout'));
 
         return Redirect::to($url);
     }
 
     /**
-     * If impersonating, revert back to the previously signed in user1.
+     * If impersonating, revert back to the previously signed in user.
      * @return Redirect
      */
     public function onStopImpersonating()
@@ -180,13 +180,13 @@ class Session extends ComponentBase
 
         $url = post('redirect', Request::fullUrl());
 
-        Flash::success(Lang::get('rainlab.user1::lang.session.stop_impersonate_success'));
+        Flash::success(Lang::get('rainlab.user::lang.session.stop_impersonate_success'));
 
         return Redirect::to($url);
     }
 
     /**
-     * Checks if the user1 can access this page based on the security rules
+     * Checks if the user can access this page based on the security rules
      * @return bool
      */
     protected function checkUserSecurity()
@@ -218,16 +218,16 @@ class Session extends ComponentBase
 
     // public function onNotifyRead()
     // {
-    //     $user1 = Auth::getUser();
+    //     $user = Auth::getUser();
         
-    //     if($notifications = $user1->notifications)
+    //     if($notifications = $user->notifications)
     //     {
     //         foreach ($notifications as $key => $notify) {
     //             $notifications[$key]["read"] = 1;
     //         }
 
-    //         $user1->notifications = $notifications;
-    //         $user1->forceSave();
+    //         $user->notifications = $notifications;
+    //         $user->forceSave();            
     //     }      
     // }
 }

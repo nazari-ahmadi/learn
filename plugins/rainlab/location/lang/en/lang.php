@@ -17,7 +17,7 @@ return [
     ],
     'locations' => [
         'menu_label' => 'Countries & States',
-        'menu_description' => 'Manage available user1 countries and states.',
+        'menu_description' => 'Manage available user countries and states.',
         'disabled_label' => 'Disabled',
         'enabled_label' => 'Enabled',
         'enabled_help' => 'Disabled locations are not visible on the front-end.',
@@ -39,9 +39,9 @@ return [
         'delete_confirm' => 'Do you really want to delete this location?',
         'return_to_list' => 'Return to locations list',
         'default_country' => 'Default Country',
-        'default_country_comment' => 'When a user1 does not specify their location, select a default country to use.',
+        'default_country_comment' => 'When a user does not specify their location, select a default country to use.',
         'default_state' => 'Default State',
-        'default_state_comment' => 'When a user1 does not specify their location, select a default state to use.',
+        'default_state_comment' => 'When a user does not specify their location, select a default state to use.',
     ],
     'settings' => [
         'menu_label' => 'Location settings',

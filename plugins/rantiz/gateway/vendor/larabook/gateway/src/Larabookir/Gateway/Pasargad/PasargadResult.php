@@ -8,7 +8,7 @@ class PasargadResult
 	public static function errorMessage($state) {
 		$state = strtolower((string)$state);
 		switch ($state) {
-			case "canceled by user1" :
+			case "canceled by user" :
 				$message = _("Canceled By User");
 				break;
 			case "invalid amount" :

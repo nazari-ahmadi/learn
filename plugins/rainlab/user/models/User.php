@@ -89,7 +89,7 @@ class User extends UserBase
     public static $loginAttribute = null;
 
     /**
-     * Sends the confirmation email to a user1, after activating.
+     * Sends the confirmation email to a user, after activating.
      * @param  string $code
      * @return bool
      */
@@ -100,18 +100,18 @@ class User extends UserBase
             return false;
         }
 
-        Event::fire('rainlab.user1.activate', [$this]);
+        Event::fire('rainlab.user.activate', [$this]);
 
         return true;
     }
 
     /**
-     * Converts a guest user1 to a registered one and sends an invitation notification.
+     * Converts a guest user to a registered one and sends an invitation notification.
      * @return void
      */
     public function convertToRegistered($sendNotification = true)
     {
-        // Already a registered user1
+        // Already a registered user
         if (!$this->is_guest) {
             return;
         }
@@ -133,7 +133,7 @@ class User extends UserBase
     //
 
     /**
-     * Looks up a user1 by their email address.
+     * Looks up a user by their email address.
      * @return self
      */
     public static function findByEmail($email)
@@ -150,7 +150,7 @@ class User extends UserBase
     //
 
     /**
-     * Gets a code for when the user1 is persisted to a cookie or session which identifies the user1.
+     * Gets a code for when the user is persisted to a cookie or session which identifies the user.
      * @return string
      */
     public function getPersistCode()
@@ -165,7 +165,7 @@ class User extends UserBase
     }
 
     /**
-     * Returns the public image file path to this user1's avatar.
+     * Returns the public image file path to this user's avatar.
      */
     public function getAvatarThumb($size = 25, $options = null)
     {
@@ -191,7 +191,7 @@ class User extends UserBase
     }
 
     /**
-     * Returns the name for the user1's login.
+     * Returns the name for the user's login.
      * @return string
      */
     public function getLoginName()
@@ -293,7 +293,7 @@ class User extends UserBase
         if ($this->is_guest) {
             $login = $this->getLogin();
             throw new AuthException(sprintf(
-                'Cannot login user1 "%s" as they are not registered.', $login
+                'Cannot login user "%s" as they are not registered.', $login
             ));
         }
 
@@ -311,17 +311,17 @@ class User extends UserBase
         if ($this->trashed()) {
             $this->restore();
 
-            Mail::sendTo($this, 'rainlab.user1::mail.reactivate', [
+            Mail::sendTo($this, 'rainlab.user::mail.reactivate', [
                 'name' => $this->name
             ]);
 
-            Event::fire('rainlab.user1.reactivate', [$this]);
+            Event::fire('rainlab.user.reactivate', [$this]);
         }
         else {
             parent::afterLogin();
         }
 
-        Event::fire('rainlab.user1.login', [$this]);
+        Event::fire('rainlab.user.login', [$this]);
     }
 
     /**
@@ -331,7 +331,7 @@ class User extends UserBase
     public function afterDelete()
     {
         if ($this->isSoftDelete()) {
-            Event::fire('rainlab.user1.deactivate', [$this]);
+            Event::fire('rainlab.user.deactivate', [$this]);
             return;
         }
 
@@ -345,7 +345,7 @@ class User extends UserBase
     //
 
     /**
-     * Ban this user1, preventing them from signing in.
+     * Ban this user, preventing them from signing in.
      * @return void
      */
     public function ban()
@@ -354,7 +354,7 @@ class User extends UserBase
     }
 
     /**
-     * Remove the ban on this user1.
+     * Remove the ban on this user.
      * @return void
      */
     public function unban()
@@ -363,7 +363,7 @@ class User extends UserBase
     }
 
     /**
-     * Check if the user1 is banned.
+     * Check if the user is banned.
      * @return bool
      */
     public function isBanned()
@@ -377,7 +377,7 @@ class User extends UserBase
     //
 
     /**
-     * Checks if the user1 has been seen in the last 5 minutes, and if not,
+     * Checks if the user has been seen in the last 5 minutes, and if not,
      * updates the last_seen timestamp to reflect their online status.
      * @return void
      */
@@ -401,7 +401,7 @@ class User extends UserBase
     }
 
     /**
-     * Returns true if the user1 has been active within the last 5 minutes.
+     * Returns true if the user has been active within the last 5 minutes.
      * @return bool
      */
     public function isOnline()
@@ -410,7 +410,7 @@ class User extends UserBase
     }
 
     /**
-     * Returns the date this user1 was last seen.
+     * Returns the date this user was last seen.
      * @return Carbon\Carbon
      */
     public function getLastSeen()
@@ -423,7 +423,7 @@ class User extends UserBase
     //
 
     /**
-     * Returns the variables available when sending a user1 notification.
+     * Returns the variables available when sending a user notification.
      * @return array
      */
     public function getNotificationVars()
@@ -439,7 +439,7 @@ class User extends UserBase
         /*
          * Extensibility
          */
-        $result = Event::fire('rainlab.user1.getNotificationVars', [$this]);
+        $result = Event::fire('rainlab.user.getNotificationVars', [$this]);
         if ($result && is_array($result)) {
             $vars = call_user_func_array('array_merge', $result) + $vars;
         }
@@ -448,16 +448,16 @@ class User extends UserBase
     }
 
     /**
-     * Sends an invitation to the user1 using template "rainlab.user1::mail.invite".
+     * Sends an invitation to the user using template "rainlab.user::mail.invite".
      * @return void
      */
     protected function sendInvitation()
     {
-        Mail::sendTo($this, 'rainlab.user1::mail.invite', $this->getNotificationVars());
+        Mail::sendTo($this, 'rainlab.user::mail.invite', $this->getNotificationVars());
     }
 
     /**
-     * Assigns this user1 with a random password.
+     * Assigns this user with a random password.
      * @return void
      */
     protected function generatePassword()

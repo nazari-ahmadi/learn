@@ -8,7 +8,7 @@ use Exception;
 /**
  * Mail Blocker
  *
- * A utility model that allows a user1 to block specific
+ * A utility model that allows a user to block specific
  * mail views/templates from being sent to their address.
  */
 class MailBlocker extends Model
@@ -27,24 +27,24 @@ class MailBlocker extends Model
      * @var array Relations
      */
     public $belongsTo = [
-        'user1' => User::class
+        'user' => User::class
     ];
 
     /**
      * @var array Templates names that cannot be blocked.
      */
     protected static $safeTemplates = [
-        'rainlab.user1::mail.restore'
+        'rainlab.user::mail.restore'
     ];
 
     /**
-     * Sets mail blocking preferences for a user1. Eg:
+     * Sets mail blocking preferences for a user. Eg:
      *
-     * MailBlocker::setPreferences($user1, [acme.blog::post.new_reply => 0])
+     * MailBlocker::setPreferences($user, [acme.blog::post.new_reply => 0])
      *
-     * MailBlocker::setPreferences($user1, [acme.blog::post.new_reply => 0], [fillable => [acme.blog::post.new_reply]])
+     * MailBlocker::setPreferences($user, [acme.blog::post.new_reply => 0], [fillable => [acme.blog::post.new_reply]])
      *
-     * MailBlocker::setPreferences($user1, [template_alias => 0], [aliases => [template_alias => acme.blog::post.new_reply]])
+     * MailBlocker::setPreferences($user, [template_alias => 0], [aliases => [template_alias => acme.blog::post.new_reply]])
      *
      * Supported options:
      * - aliases: Alias definitions, with alias as key and template as value.
@@ -61,7 +61,7 @@ class MailBlocker extends Model
         $templates = (array) $templates;
 
         if (!$user) {
-            throw new Exception('A user1 must be provided for MailBlocker::setPreferences');
+            throw new Exception('A user must be provided for MailBlocker::setPreferences');
         }
 
         extract(array_merge([
@@ -100,7 +100,7 @@ class MailBlocker extends Model
     }
 
     /**
-     * Adds a block for a user1 and a mail view/template code.
+     * Adds a block for a user and a mail view/template code.
      * @param string                   $template
      * @param RainLab\User\Models\User $user
      * @return bool
@@ -129,7 +129,7 @@ class MailBlocker extends Model
     }
 
     /**
-     * Removes a block for a user1 and a mail view/template code.
+     * Removes a block for a user and a mail view/template code.
      * @param string                   $template
      * @param RainLab\User\Models\User $user
      * @return bool
@@ -156,7 +156,7 @@ class MailBlocker extends Model
     }
 
     /**
-     * Blocks all mail messages for a user1.
+     * Blocks all mail messages for a user.
      * @param RainLab\User\Models\User $user
      * @return bool
      */
@@ -166,7 +166,7 @@ class MailBlocker extends Model
     }
 
     /**
-     * Removes block on all mail messages for a user1.
+     * Removes block on all mail messages for a user.
      * @param RainLab\User\Models\User $user
      * @return bool
      */
@@ -176,7 +176,7 @@ class MailBlocker extends Model
     }
 
     /**
-     * Checks if a user1 is blocking all templates.
+     * Checks if a user is blocking all templates.
      * @param RainLab\User\Models\User $user
      * @return bool
      */
@@ -186,7 +186,7 @@ class MailBlocker extends Model
     }
 
     /**
-     * Updates mail blockers for a user1 if they change their email address
+     * Updates mail blockers for a user if they change their email address
      * @param  Model $user
      * @return mixed
      */
@@ -196,7 +196,7 @@ class MailBlocker extends Model
     }
 
     /**
-     * Returns a list of mail templates blocked by the user1.
+     * Returns a list of mail templates blocked by the user.
      * @param  Model $user
      * @return array
      */

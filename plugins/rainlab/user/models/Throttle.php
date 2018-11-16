@@ -13,6 +13,6 @@ class Throttle extends ThrottleBase
      * @var array Relations
      */
     public $belongsTo = [
-        'user1' => User::class
+        'user' => User::class
     ];
 }

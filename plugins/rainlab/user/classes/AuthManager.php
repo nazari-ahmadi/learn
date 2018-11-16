@@ -67,7 +67,7 @@ class AuthManager extends RainAuthManager
     }
 
     /**
-     * Registers a guest user1 by giving the required credentials.
+     * Registers a guest user by giving the required credentials.
      *
      * @param array $credentials
      * @return Models\User
@@ -86,7 +86,7 @@ class AuthManager extends RainAuthManager
         $user->is_guest = true;
         $user->save();
 
-        // Add user1 to guest group
+        // Add user to guest group
         if ($newUser && $group = UserGroupModel::getGuestGroup()) {
             $user->groups()->add($group);
         }
@@ -99,7 +99,7 @@ class AuthManager extends RainAuthManager
     }
 
     /**
-     * Converts a guest user1 to a registered user1.
+     * Converts a guest user to a registered user.
      *
      * @param Models\User $user
      * @param array $credentials
@@ -111,7 +111,7 @@ class AuthManager extends RainAuthManager
         $user->fill($credentials);
         $user->convertToRegistered(false);
 
-        // Remove user1 from guest group
+        // Remove user from guest group
         if ($group = UserGroupModel::getGuestGroup()) {
             $user->groups()->remove($group);
         }

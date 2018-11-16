@@ -36,7 +36,7 @@ class Transaction extends Model
 
      */
     public $belongsTo = [
-        'user1' => ['RainLab\User\Models\User'],
+        'user' => ['RainLab\User\Models\User'],
         // 'order' => ['Ls\Details\Models\Course', 'key' => 'order_id'],
     ];
 

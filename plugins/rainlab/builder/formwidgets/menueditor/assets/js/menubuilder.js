@@ -2,7 +2,7 @@
  * Menu Builder widget class.
  *
  * There is only a single instance of the Menu Builder class and it handles
- * as many menu builder user1 interfaces as needed.
+ * as many menu builder user interfaces as needed.
  *
  */
 +function ($) { "use strict";

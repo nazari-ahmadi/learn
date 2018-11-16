@@ -35,7 +35,7 @@ class Log extends Model
 
      */
     public $belongsTo = [
-        'user1' => ['RainLab\User\Models\User'],
+        'user' => ['RainLab\User\Models\User'],
     ];
 
     /*

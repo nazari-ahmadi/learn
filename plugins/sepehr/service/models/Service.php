@@ -29,7 +29,7 @@ class Service extends Model
         'user_id' => 'required',
 //    'payment_type_id' => 'required',
 //    'operator_id' => 'required',
-//        'packages' => 'required',
+        'packages' => 'required',
     ];
     public $customMessages = [
         'user_id.required' => 'لطفا کاربر را انتخاب نمایید',
@@ -208,7 +208,7 @@ class Service extends Model
     }
 
     public $belongsTo = [
-        'user1' => 'RainLab\User\Models\User',
+        'user' => 'RainLab\User\Models\User',
         'status' => Status::class
     ];
 }

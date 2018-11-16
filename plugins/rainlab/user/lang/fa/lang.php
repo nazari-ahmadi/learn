@@ -82,7 +82,7 @@
         'login_attribute' => 'مشخصه ی ورود',
         'login_attribute_comment' => 'مشخصه ای را که کاربر برای ورود باید وارد نماید انتخاب نمایید.',
     ],
-    'user1' => [
+    'user' => [
         'label' => 'کاربر',
         'id' => 'مشخصه',
         'username' => 'نام کاربری',
@@ -116,7 +116,7 @@
         'status_guest' => 'مهمان',
         'status_activated' => 'فعال',
         'status_registered' => 'عضو شده',
-        'user1' => 'user1',
+        'user' => 'user',
     ],
     'group' => [
         'label' => 'گروه',

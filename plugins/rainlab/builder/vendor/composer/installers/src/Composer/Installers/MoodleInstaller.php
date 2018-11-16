@@ -48,7 +48,7 @@ class MoodleInstaller extends BaseInstaller
         'search'             => 'search/engine/{$name}/',
         'theme'              => 'theme/{$name}/',
         'tinymce'            => 'lib/editor/tinymce/plugins/{$name}/',
-        'profilefield'       => 'user1/profile/field/{$name}/',
+        'profilefield'       => 'user/profile/field/{$name}/',
         'webservice'         => 'webservice/{$name}/',
         'workshopallocation' => 'mod/workshop/allocation/{$name}/',
         'workshopeval'       => 'mod/workshop/eval/{$name}/',

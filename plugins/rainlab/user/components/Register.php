@@ -36,20 +36,20 @@ class Register extends ComponentBase
     {
         return [
             'redirect' => [
-                'title'       => /*Redirect to*/'rainlab.user1::lang.account.redirect_to',
-                'description' => /*Page name to redirect to after update, sign in or registration.*/'rainlab.user1::lang.account.redirect_to_desc',
+                'title'       => /*Redirect to*/'rainlab.user::lang.account.redirect_to',
+                'description' => /*Page name to redirect to after update, sign in or registration.*/'rainlab.user::lang.account.redirect_to_desc',
                 'type'        => 'dropdown',
                 'default'     => ''
             ],
             'paramCode' => [
-                'title'       => /*Activation Code Param*/'rainlab.user1::lang.account.code_param',
-                'description' => /*The page URL parameter used for the registration activation code*/ 'rainlab.user1::lang.account.code_param_desc',
+                'title'       => /*Activation Code Param*/'rainlab.user::lang.account.code_param',
+                'description' => /*The page URL parameter used for the registration activation code*/ 'rainlab.user::lang.account.code_param_desc',
                 'type'        => 'string',
                 'default'     => 'code'
             ],
             'forceSecure' => [
-                'title'       => /*Force secure protocol*/'rainlab.user1::lang.account.force_secure',
-                'description' => /*Always redirect the URL with the HTTPS schema.*/'rainlab.user1::lang.account.force_secure_desc',
+                'title'       => /*Force secure protocol*/'rainlab.user::lang.account.force_secure',
+                'description' => /*Always redirect the URL with the HTTPS schema.*/'rainlab.user::lang.account.force_secure_desc',
                 'type'        => 'checkbox',
                 'default'     => 0
             ],
@@ -66,7 +66,7 @@ class Register extends ComponentBase
      */
     public function prepareVars()
     {
-        $this->page['user1']                 = $this->user();
+        $this->page['user']                 = $this->user();
         $this->page['canRegister']          = $this->canRegister();
         $this->page['loginAttribute']       = $this->loginAttribute();
         $this->page['loginAttributeLabel']  = $this->loginAttributeLabel();
@@ -97,7 +97,7 @@ class Register extends ComponentBase
     }
 
     /**
-     * Returns the logged in user1, if available
+     * Returns the logged in user, if available
      */
     public function user()
     {
@@ -130,8 +130,8 @@ class Register extends ComponentBase
     public function loginAttributeLabel()
     {
         return Lang::get($this->loginAttribute() == UserSettings::LOGIN_EMAIL
-            ? /*Email*/'rainlab.user1::lang.login.attribute_email'
-            : /*Username*/'rainlab.user1::lang.login.attribute_username'
+            ? /*Email*/'rainlab.user::lang.login.attribute_email'
+            : /*Username*/'rainlab.user::lang.login.attribute_username'
         );
     }
 
@@ -152,13 +152,13 @@ class Register extends ComponentBase
     }
 
     /**
-     * Register the user1
+     * Register the user
      */
     public function onRegister()
     {
         try {
             if (!$this->canRegister()) {
-                throw new ApplicationException(Lang::get(/*Registrations are currently disabled.*/'rainlab.user1::lang.account.registration_disabled'));
+                throw new ApplicationException(Lang::get(/*Registrations are currently disabled.*/'rainlab.user::lang.account.registration_disabled'));
             }
 
             /*
@@ -216,9 +216,9 @@ class Register extends ComponentBase
             // }         
 
             /*
-             * Register user1
+             * Register user
              */
-            Event::fire('rainlab.user1.beforeRegister', [&$data]);
+            Event::fire('rainlab.user.beforeRegister', [&$data]);
 
             $requireActivation = UserSettings::get('require_activation', true);
             $automaticActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_AUTO;
@@ -226,30 +226,30 @@ class Register extends ComponentBase
             $userActivationSMS = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_USER_SMS;
             $user = Auth::register($data, $automaticActivation);
 
-            Event::fire('rainlab.user1.register', [$user, $data]);
+            Event::fire('rainlab.user.register', [$user, $data]);
 
             /*
-             * Activation is by the user1, send the email
+             * Activation is by the user, send the email
              */
             if ($userActivationEmail) {
                 $this->sendActivationEmail($user);
 
-                Flash::success(Lang::get(/*An activation email has been sent to your email address.*/'rainlab.user1::lang.account.activation_email_sent'));
+                Flash::success(Lang::get(/*An activation email has been sent to your email address.*/'rainlab.user::lang.account.activation_email_sent'));
             }
 
             /*
-             * Activation is by the user1, send the sms
+             * Activation is by the user, send the sms
              */
             if ($userActivationSMS) {
                 $this->sendActivationSMS($user);
 
-                Flash::success(Lang::get(/*An activation sms has been sent to your mobile number.*/'rainlab.user1::lang.account.activation_sms_sent'));
+                Flash::success(Lang::get(/*An activation sms has been sent to your mobile number.*/'rainlab.user::lang.account.activation_sms_sent'));
 
                 return Redirect::to(url('activation'))->with(['mobile' => $user->mobile]);
             }
 
             /*
-             * Automatically activated or not required, log the user1 in
+             * Automatically activated or not required, log the user in
              */
             if ($automaticActivation || !$requireActivation) {
                 Auth::login($user);
@@ -274,7 +274,7 @@ class Register extends ComponentBase
     }
 
     /**
-     * Activate the user1
+     * Activate the user
      * @param  string $code Activation code
      */
     public function onActivate($code = null)
@@ -287,23 +287,23 @@ class Register extends ComponentBase
              */
             $parts = explode('!', $code);
             if (count($parts) != 2) {
-                throw new ValidationException(['code' => Lang::get('rainlab.user1::lang.account.invalid_activation_code')]);
+                throw new ValidationException(['code' => Lang::get('rainlab.user::lang.account.invalid_activation_code')]);
             }
 
             list($userId, $code) = $parts;
 
             if (!strlen(trim($userId)) || !($user = Auth::findUserById($userId))) {
-                throw new ApplicationException(Lang::get('rainlab.user1::lang.account.invalid_user'));
+                throw new ApplicationException(Lang::get('rainlab.user::lang.account.invalid_user'));
             }
 
             if (!$user->attemptActivation($code)) {
-                throw new ValidationException(['code' => Lang::get('rainlab.user1::lang.account.invalid_activation_code')]);
+                throw new ValidationException(['code' => Lang::get('rainlab.user::lang.account.invalid_activation_code')]);
             }
 
-            Flash::success(Lang::get('rainlab.user1::lang.account.success_activation'));
+            Flash::success(Lang::get('rainlab.user::lang.account.success_activation'));
 
             /*
-             * Sign in the user1
+             * Sign in the user
              */
             Auth::login($user);
 
@@ -321,14 +321,14 @@ class Register extends ComponentBase
     {
         try {
             if (!$user = $this->user()) {
-                throw new ApplicationException(Lang::get('rainlab.user1::lang.account.login_first'));
+                throw new ApplicationException(Lang::get('rainlab.user::lang.account.login_first'));
             }
 
             if ($user->is_activated) {
-                throw new ApplicationException(Lang::get('rainlab.user1::lang.account.already_active'));
+                throw new ApplicationException(Lang::get('rainlab.user::lang.account.already_active'));
             }
 
-            Flash::success(Lang::get('rainlab.user1::lang.account.activation_email_sent'));
+            Flash::success(Lang::get('rainlab.user::lang.account.activation_email_sent'));
 
             $this->sendActivationEmail($user);
 
@@ -347,7 +347,7 @@ class Register extends ComponentBase
     }
 
     /**
-     * Sends the activation email to a user1
+     * Sends the activation email to a user
      * @param  User $user
      * @return void
      */
@@ -364,7 +364,7 @@ class Register extends ComponentBase
             'code' => $code
         ];
 
-        Mail::send('rainlab.user1::mail.activate', $data, function($message) use ($user) {
+        Mail::send('rainlab.user::mail.activate', $data, function($message) use ($user) {
             $message->to($user->email, $user->name);
         });
     }
@@ -379,7 +379,7 @@ class Register extends ComponentBase
     }
 
     /**
-     * Sends the activation sms to a user1
+     * Sends the activation sms to a user
      * @param  User $user
      * @return void
      */
