@@ -1,0 +1,46 @@
+title = "پروفایل"
+url = "/profile"
+layout = "users"
+is_hidden = 0
+
+[account]
+paramCode = "code"
+forceSecure = 0
+
+[session]
+security = "user"
+redirect = "home"
+
+[imageUploader]
+placeholderText = "Click or drag images to upload"
+maxSize = 1
+fileTypes = ".gif,.jpg,.jpeg,.png,.ggj"
+imageWidth = 100
+imageHeight = 100
+imageMode = "crop"
+modelClass = "RainLab\User\Models\User"
+modelKeyColumn = "avatar"
+identifierValue = "{{ :id }}"
+getUser = 1
+==
+{% put scripts %}
+    <script src="{{ storm_min }}"></script>
+    <script src="{{ october_min }}"></script>
+    <script src="{{ lang }}"></script>
+{% endput %}
+<!-- Breadcrumbs -->
+<div class="header">
+  <h2><strong>پروفایل شما</strong></h2>
+<!--   <div class="breadcrumb-wrapper">
+    <ol class="breadcrumb">
+      <li><a href="{{ 'user/dashboard'|page }}">داشبورد</a>
+      </li>
+      <li class="active">پروفایل</li>      
+    </ol>
+  </div> -->
+</div>
+<!-- end Breadcrumbs -->
+
+<div class="row">
+  {% component 'account' %}
+</div>

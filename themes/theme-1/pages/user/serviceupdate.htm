@@ -1,0 +1,15 @@
+title = "ویرایش سرویس"
+url = "/serviceupdate/:id"
+layout = "Users"
+is_hidden = 0
+
+[requestService]
+id = "{{:id}}"
+==
+{% component 'requestService' %}
+
+{% put scripts %}
+    <script src="{{ storm_min }}"></script>
+    <script src="{{ october_min }}"></script>
+    <script src="{{ lang }}"></script> 
+{% endput %}

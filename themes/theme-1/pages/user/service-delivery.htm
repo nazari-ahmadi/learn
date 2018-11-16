@@ -1,0 +1,15 @@
+title = "تحویل گرفتن بسته"
+url = "/service-delivery/:id"
+layout = "Users"
+is_hidden = 0
+
+[ServiceDelivery]
+id = "{{:id}}"
+==
+{% component 'ServiceDelivery' %}
+
+{% put scripts %}
+    <script src="{{ storm_min }}"></script>
+    <script src="{{ october_min }}"></script>
+    <script src="{{ lang }}"></script> 
+{% endput %}
