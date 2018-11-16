@@ -16,3 +16,5 @@ themes/theme-1/*
 !/themes/theme-1/pages/
 !/themes/theme-1/pages/*
 !.gitignore
+
+
