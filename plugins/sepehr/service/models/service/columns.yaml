@@ -9,7 +9,7 @@ columns:
         searchable: true
         sortable: true
         select: 'concat(first_name,'' '',last_name)'
-        relation: user1
+        relation: user
     status:
         label: 'وضعیت مرسوله'
         type: text

@@ -38,7 +38,7 @@ class MayaInstallerTest extends BaseTestCase
             // Should keep module name StudlyCase
             array(
                 'maya-module',
-                'user1-profile',
+                'user-profile',
                 'UserProfile'
             ),
             array(

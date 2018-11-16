@@ -31,14 +31,14 @@ class Login extends ComponentBase
     {
         return [
             'redirect' => [
-                'title'       => /*Redirect to*/'rainlab.user1::lang.account.redirect_to',
-                'description' => /*Page name to redirect to after update, sign in or registration.*/'rainlab.user1::lang.account.redirect_to_desc',
+                'title'       => /*Redirect to*/'rainlab.user::lang.account.redirect_to',
+                'description' => /*Page name to redirect to after update, sign in or registration.*/'rainlab.user::lang.account.redirect_to_desc',
                 'type'        => 'dropdown',
                 'default'     => ''
             ],
             'forceSecure' => [
-                'title'       => /*Force secure protocol*/'rainlab.user1::lang.account.force_secure',
-                'description' => /*Always redirect the URL with the HTTPS schema.*/'rainlab.user1::lang.account.force_secure_desc',
+                'title'       => /*Force secure protocol*/'rainlab.user::lang.account.force_secure',
+                'description' => /*Always redirect the URL with the HTTPS schema.*/'rainlab.user::lang.account.force_secure_desc',
                 'type'        => 'checkbox',
                 'default'     => 0
             ],
@@ -55,7 +55,7 @@ class Login extends ComponentBase
      */
     public function prepareVars()
     {
-        $this->page['user1'] = $this->user();
+        $this->page['user'] = $this->user();
         $this->page['canRegister'] = $this->canRegister();
         $this->page['loginAttribute'] = $this->loginAttribute();
         $this->page['loginAttributeLabel'] = $this->loginAttributeLabel();
@@ -85,7 +85,7 @@ class Login extends ComponentBase
     }
 
     /**
-     * Returns the logged in user1, if available
+     * Returns the logged in user, if available
      */
     public function user()
     {
@@ -118,8 +118,8 @@ class Login extends ComponentBase
     public function loginAttributeLabel()
     {
         return Lang::get($this->loginAttribute() == UserSettings::LOGIN_EMAIL
-            ? /*Email*/'rainlab.user1::lang.login.attribute_email'
-            : /*Username*/'rainlab.user1::lang.login.attribute_username'
+            ? /*Email*/'rainlab.user::lang.login.attribute_email'
+            : /*Username*/'rainlab.user::lang.login.attribute_username'
         );
     }
 
@@ -140,7 +140,7 @@ class Login extends ComponentBase
     }    
 
     /**
-     * Sign in the user1
+     * Sign in the user
      */
     public function onSignin()
     {
@@ -180,20 +180,20 @@ class Login extends ComponentBase
             }
 
             /*
-             * Authenticate user1
+             * Authenticate user
              */
             $credentials = [
                 'login'    => array_get($data, 'login'),
                 'password' => array_get($data, 'password')
             ];
 
-            Event::fire('rainlab.user1.beforeAuthenticate', [$this, $credentials]);
+            Event::fire('rainlab.user.beforeAuthenticate', [$this, $credentials]);
 
             $user = Auth::authenticate($credentials, false);
 
             if ($user->isBanned()) {
                 Auth::logout();
-                throw new AuthException(/*Sorry, this user1 is currently not activated. Please contact us for further assistance.*/'rainlab.user1::lang.account.banned');
+                throw new AuthException(/*Sorry, this user is currently not activated. Please contact us for further assistance.*/'rainlab.user::lang.account.banned');
             }
 
             if(!$user->first_login)

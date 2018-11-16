@@ -150,7 +150,7 @@ class Mellat extends PortAbstract implements PortInterface
 	}
 
 	/**
-	 * Check user1 payment
+	 * Check user payment
 	 *
 	 * @return bool
 	 *
@@ -173,7 +173,7 @@ class Mellat extends PortAbstract implements PortInterface
 	}
 
 	/**
-	 * Verify user1 payment from bank server
+	 * Verify user payment from bank server
 	 *
 	 * @return bool
 	 *

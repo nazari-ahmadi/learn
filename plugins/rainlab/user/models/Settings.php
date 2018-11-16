@@ -38,20 +38,20 @@ class Settings extends Model
     {
         return [
             self::ACTIVATE_AUTO => [
-                'rainlab.user1::lang.settings.activate_mode_auto',
-                'rainlab.user1::lang.settings.activate_mode_auto_comment'
+                'rainlab.user::lang.settings.activate_mode_auto',
+                'rainlab.user::lang.settings.activate_mode_auto_comment'
             ],
             self::ACTIVATE_USER_EMAIL => [
-                'rainlab.user1::lang.settings.activate_mode_user',
-                'rainlab.user1::lang.settings.activate_mode_user_comment'
+                'rainlab.user::lang.settings.activate_mode_user',
+                'rainlab.user::lang.settings.activate_mode_user_comment'
             ],
             self::ACTIVATE_USER_SMS => [
-                'rainlab.user1::lang.settings.activate_mode_user_sms',
-                'rainlab.user1::lang.settings.activate_mode_user_comment_sms'
+                'rainlab.user::lang.settings.activate_mode_user_sms',
+                'rainlab.user::lang.settings.activate_mode_user_comment_sms'
             ],            
             self::ACTIVATE_ADMIN => [
-                'rainlab.user1::lang.settings.activate_mode_admin',
-                'rainlab.user1::lang.settings.activate_mode_admin_comment'
+                'rainlab.user::lang.settings.activate_mode_admin',
+                'rainlab.user::lang.settings.activate_mode_admin_comment'
             ]
         ];
     }
@@ -59,8 +59,8 @@ class Settings extends Model
     public function getLoginAttributeOptions()
     {
         return [
-            self::LOGIN_EMAIL => ['rainlab.user1::lang.login.attribute_email'],
-            self::LOGIN_USERNAME => ['rainlab.user1::lang.login.attribute_username']
+            self::LOGIN_EMAIL => ['rainlab.user::lang.login.attribute_email'],
+            self::LOGIN_USERNAME => ['rainlab.user::lang.login.attribute_username']
         ];
     }
 

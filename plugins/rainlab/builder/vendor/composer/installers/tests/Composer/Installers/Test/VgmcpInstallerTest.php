@@ -38,7 +38,7 @@ class VgmcpInstallerTest extends BaseTestCase
             // Should keep bundle name StudlyCase
             array(
                 'vgmcp-bundle',
-                'user1-profile',
+                'user-profile',
                 'UserProfile'
             ),
             array(

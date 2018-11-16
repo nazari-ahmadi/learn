@@ -8,11 +8,11 @@ columns:
         type: number
         searchable: true
     user:
-        label: 'rantiz.gateway::lang.form.field.user1'
+        label: 'rantiz.gateway::lang.form.field.user'
         type: text
         searchable: true
         select: concat(last_name,' ، ',first_name,' - ',username)
-        relation: user1
+        relation: user
     # order:
     #     label: 'rantiz.gateway::lang.form.field.order'
     #     type: text

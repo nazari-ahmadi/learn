@@ -14,8 +14,8 @@ class ExpressionEngineInstaller extends BaseInstaller
     );
 
     private $ee3Locations = array(
-        'addon'   => 'system/user1/addons/{$name}/',
-        'theme'   => 'themes/user1/{$name}/',
+        'addon'   => 'system/user/addons/{$name}/',
+        'theme'   => 'themes/user/{$name}/',
     );
 
     public function getInstallPath(PackageInterface $package, $frameworkType = '')

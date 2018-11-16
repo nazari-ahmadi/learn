@@ -74,7 +74,7 @@ class Activation extends ComponentBase
 
 
     /**
-     * Activate the user1
+     * Activate the user
      * @param  string $code Activation code
      */
     public function onSMSActivate()
@@ -111,10 +111,10 @@ class Activation extends ComponentBase
             $user->activated_at = Carbon::now();
             $user->forceSave();
 
-            Flash::success(Lang::get('rainlab.user1::lang.account.success_activation'));
+            Flash::success(Lang::get('rainlab.user::lang.account.success_activation'));
 
             /*
-             * Sign in the user1
+             * Sign in the user
              */
             Auth::login($user);
 

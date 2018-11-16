@@ -63,7 +63,7 @@ class Users extends Controller
 
     public function index()
     {
-        $this->addJs('/plugins/rainlab/user1/assets/js/bulk-actions.js');
+        $this->addJs('/plugins/rainlab/user/assets/js/bulk-actions.js');
 
         $this->asExtension('ListController')->index();
     }
@@ -126,7 +126,7 @@ class Users extends Controller
     }
 
     /**
-     * Manually activate a user1
+     * Manually activate a user
      */
     public function preview_onActivate($recordId = null)
     {
@@ -134,7 +134,7 @@ class Users extends Controller
 
         $model->attemptActivation($model->activation_code);
 
-        Flash::success(Lang::get('rainlab.user1::lang.users.activated_success'));
+        Flash::success(Lang::get('rainlab.user::lang.users.activated_success'));
 
         if ($redirect = $this->makeRedirect('update-close', $model)) {
             return $redirect;
@@ -148,7 +148,7 @@ class Users extends Controller
     }
 
     /**
-     * Manually unban a user1
+     * Manually unban a user
      */
     public function preview_onUnban($recordId = null)
     {
@@ -156,7 +156,7 @@ class Users extends Controller
 
         $model->unban();
 
-        Flash::success(Lang::get('rainlab.user1::lang.users.unbanned_success'));
+        Flash::success(Lang::get('rainlab.user::lang.users.unbanned_success'));
 
         if ($redirect = $this->makeRedirect('update-close', $model)) {
             return $redirect;
@@ -164,7 +164,7 @@ class Users extends Controller
     }
 
     /**
-     * Display the convert to registered user1 popup
+     * Display the convert to registered user popup
      */
     public function preview_onLoadConvertGuestForm($recordId)
     {
@@ -174,21 +174,21 @@ class Users extends Controller
     }
 
     /**
-     * Manually convert a guest user1 to a registered one
+     * Manually convert a guest user to a registered one
      */
     public function preview_onConvertGuest($recordId)
     {
         $model = $this->formFindModelObject($recordId);
 
-        // Convert user1 and send notification
+        // Convert user and send notification
         $model->convertToRegistered(post('send_registration_notification', false));
 
-        // Remove user1 from guest group
+        // Remove user from guest group
         if ($group = UserGroup::getGuestGroup()) {
             $model->groups()->remove($group);
         }
 
-        // Add user1 to new group
+        // Add user to new group
         if (
             ($groupId = post('new_group')) &&
             ($group = UserGroup::find($groupId))
@@ -196,7 +196,7 @@ class Users extends Controller
             $model->groups()->add($group);
         }
 
-        Flash::success(Lang::get('rainlab.user1::lang.users.convert_guest_success'));
+        Flash::success(Lang::get('rainlab.user::lang.users.convert_guest_success'));
 
         if ($redirect = $this->makeRedirect('update-close', $model)) {
             return $redirect;
@@ -204,7 +204,7 @@ class Users extends Controller
     }
 
     /**
-     * Impersonate this user1
+     * Impersonate this user
      */
     public function preview_onImpersonateUser($recordId)
     {
@@ -216,11 +216,11 @@ class Users extends Controller
 
         Auth::impersonate($model);
 
-        Flash::success(Lang::get('rainlab.user1::lang.users.impersonate_success'));
+        Flash::success(Lang::get('rainlab.user::lang.users.impersonate_success'));
     }
 
     /**
-     * Force delete a user1.
+     * Force delete a user.
      */
     public function update_onDelete($recordId = null)
     {
@@ -279,10 +279,10 @@ class Users extends Controller
                 }
             }
 
-            Flash::success(Lang::get('rainlab.user1::lang.users.'.$bulkAction.'_selected_success'));
+            Flash::success(Lang::get('rainlab.user::lang.users.'.$bulkAction.'_selected_success'));
         }
         else {
-            Flash::error(Lang::get('rainlab.user1::lang.users.'.$bulkAction.'_selected_empty'));
+            Flash::error(Lang::get('rainlab.user::lang.users.'.$bulkAction.'_selected_empty'));
         }
 
         return $this->listRefresh();

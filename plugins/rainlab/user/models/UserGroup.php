@@ -44,7 +44,7 @@ class UserGroup extends GroupBase
     protected static $guestGroup = null;
 
     /**
-     * Returns the guest user1 group.
+     * Returns the guest user group.
      * @return RainLab\User\Models\UserGroup
      */
     public static function getGuestGroup()

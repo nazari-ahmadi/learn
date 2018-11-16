@@ -21,11 +21,11 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'rainlab.user1::lang.plugin.name',
-            'description' => 'rainlab.user1::lang.plugin.description',
+            'name'        => 'rainlab.user::lang.plugin.name',
+            'description' => 'rainlab.user::lang.plugin.description',
             'author'      => 'Alexey Bobkov, Samuel Georges',
-            'icon'        => 'icon-user1',
-            'homepage'    => 'https://github.com/rainlab/user1-plugin'
+            'icon'        => 'icon-user',
+            'homepage'    => 'https://github.com/rainlab/user-plugin'
         ];
     }
 
@@ -34,7 +34,7 @@ class Plugin extends PluginBase
         $alias = AliasLoader::getInstance();
         $alias->alias('Auth', 'RainLab\User\Facades\Auth');
 
-        App::singleton('user1.auth', function() {
+        App::singleton('user.auth', function() {
             return \RainLab\User\Classes\AuthManager::instance();
         });
 
@@ -54,7 +54,7 @@ class Plugin extends PluginBase
         });
 
         /*
-         * Apply user1-based mail blocking
+         * Apply user-based mail blocking
          */
         Event::listen('mailer.prepareSend', function($mailer, $view, $message) {
             return MailBlocker::filterMessage($view, $message);
@@ -82,20 +82,20 @@ class Plugin extends PluginBase
     {
         return [
             'rainlab.users.main.access_users' => [
-                'tab'   => 'rainlab.user1::lang.plugin.tab',
-                'label' => 'rainlab.user1::lang.plugin.access_users'
+                'tab'   => 'rainlab.user::lang.plugin.tab',
+                'label' => 'rainlab.user::lang.plugin.access_users'
             ],
             'rainlab.users.main.access_groups' => [
-                'tab'   => 'rainlab.user1::lang.plugin.tab',
-                'label' => 'rainlab.user1::lang.plugin.access_groups'
+                'tab'   => 'rainlab.user::lang.plugin.tab',
+                'label' => 'rainlab.user::lang.plugin.access_groups'
             ],
             'rainlab.users.access_settings' => [
-                'tab'   => 'rainlab.user1::lang.plugin.tab',
-                'label' => 'rainlab.user1::lang.plugin.access_settings'
+                'tab'   => 'rainlab.user::lang.plugin.tab',
+                'label' => 'rainlab.user::lang.plugin.access_settings'
             ],
             'rainlab.users.main.impersonate_user' => [
-                'tab'   => 'rainlab.user1::lang.plugin.tab',
-                'label' => 'rainlab.user1::lang.plugin.impersonate_user'
+                'tab'   => 'rainlab.user::lang.plugin.tab',
+                'label' => 'rainlab.user::lang.plugin.impersonate_user'
             ],
         ];
     }
@@ -104,22 +104,22 @@ class Plugin extends PluginBase
     {
         return [
             'main' => [
-                'label'       => 'rainlab.user1::lang.users.menu_label',
-                'url'         => Backend::url('rainlab/user1/users'),
-                'icon'        => 'icon-user1',
-                'iconSvg'     => 'plugins/rainlab/user1/assets/images/user1-icon.svg',
+                'label'       => 'rainlab.user::lang.users.menu_label',
+                'url'         => Backend::url('rainlab/user/users'),
+                'icon'        => 'icon-user',
+                'iconSvg'     => 'plugins/rainlab/user/assets/images/user-icon.svg',
                 'permissions' => ['rainlab.users.main.*'],
                 'order'       => 100,
                 'sideMenu'    => [
                     'users' => [
                         'label'       => 'کاربران',
-                        'url'         => Backend::url('rainlab/user1/users'),
-                        'icon'        => 'icon-user1',
+                        'url'         => Backend::url('rainlab/user/users'),
+                        'icon'        => 'icon-user',
                         'permissions' => ['rainlab.users.main.access_users'],
                     ],
                     'usergroups' => [
                         'label'       => 'گروه های کاربری',
-                        'url'         => Backend::url('rainlab/user1/usergroups'),
+                        'url'         => Backend::url('rainlab/user/usergroups'),
                         'icon'        => 'icon-users',
                         'permissions' => ['rainlab.users.main.access_groups'],
                     ]                    
@@ -132,8 +132,8 @@ class Plugin extends PluginBase
     {
         return [
             'settings' => [
-                'label'       => 'rainlab.user1::lang.settings.menu_label',
-                'description' => 'rainlab.user1::lang.settings.menu_description',
+                'label'       => 'rainlab.user::lang.settings.menu_label',
+                'description' => 'rainlab.user::lang.settings.menu_description',
                 'category'    => SettingsManager::CATEGORY_USERS,
                 'icon'        => 'icon-cog',
                 'class'       => 'RainLab\User\Models\Settings',
@@ -146,12 +146,12 @@ class Plugin extends PluginBase
     public function registerMailTemplates()
     {
         return [
-            'rainlab.user1::mail.activate',
-            'rainlab.user1::mail.welcome',
-            'rainlab.user1::mail.restore',
-            'rainlab.user1::mail.new_user',
-            'rainlab.user1::mail.reactivate',
-            'rainlab.user1::mail.invite',
+            'rainlab.user::mail.activate',
+            'rainlab.user::mail.welcome',
+            'rainlab.user::mail.restore',
+            'rainlab.user::mail.new_user',
+            'rainlab.user::mail.reactivate',
+            'rainlab.user::mail.invite',
         ];
     }
 
@@ -159,9 +159,9 @@ class Plugin extends PluginBase
     {
         return [
             'groups' => [
-                'user1' => [
+                'user' => [
                     'label' => 'User',
-                    'icon' => 'icon-user1'
+                    'icon' => 'icon-user'
                 ],
             ],
             'events' => [
@@ -182,13 +182,13 @@ class Plugin extends PluginBase
         }
 
         Notifier::bindEvents([
-            'rainlab.user1.activate' => \RainLab\User\NotifyRules\UserActivatedEvent::class,
-            'rainlab.user1.register' => \RainLab\User\NotifyRules\UserRegisteredEvent::class
+            'rainlab.user.activate' => \RainLab\User\NotifyRules\UserActivatedEvent::class,
+            'rainlab.user.register' => \RainLab\User\NotifyRules\UserRegisteredEvent::class
         ]);
 
         Notifier::instance()->registerCallback(function($manager) {
             $manager->registerGlobalParams([
-                'user1' => Auth::getUser()
+                'user' => Auth::getUser()
             ]);
         });
     }

@@ -3,23 +3,23 @@
 # ===================================
 
 # Record name
-name: rainlab.user1::lang.user1.label
+name: rainlab.user::lang.user.label
 
 # Model Form Field configuration
-form: $/rainlab/user1/models/user1/fields.yaml
+form: $/rainlab/user/models/user/fields.yaml
 
 # Model Class name
 modelClass: RainLab\User\Models\User
 
 # Default redirect location
-defaultRedirect: rainlab/user1/users
+defaultRedirect: rainlab/user/users
 
 # Create page
 create:
-    redirect: rainlab/user1/users/preview/:id
-    redirectClose: rainlab/user1/users
+    redirect: rainlab/user/users/preview/:id
+    redirectClose: rainlab/user/users
 
 # Update page
 update:
-    redirect: rainlab/user1/users/update/:id
-    redirectClose: rainlab/user1/users/preview/:id
+    redirect: rainlab/user/users/update/:id
+    redirectClose: rainlab/user/users/preview/:id

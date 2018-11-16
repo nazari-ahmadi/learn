@@ -30,8 +30,8 @@ class Account extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => /*Account*/'rainlab.user1::lang.account.account',
-            'description' => /*User management form.*/'rainlab.user1::lang.account.account_desc'
+            'name'        => /*Account*/'rainlab.user::lang.account.account',
+            'description' => /*User management form.*/'rainlab.user::lang.account.account_desc'
         ];
     }
 
@@ -39,20 +39,20 @@ class Account extends ComponentBase
     {
         return [
             'redirect' => [
-                'title'       => /*Redirect to*/'rainlab.user1::lang.account.redirect_to',
-                'description' => /*Page name to redirect to after update, sign in or registration.*/'rainlab.user1::lang.account.redirect_to_desc',
+                'title'       => /*Redirect to*/'rainlab.user::lang.account.redirect_to',
+                'description' => /*Page name to redirect to after update, sign in or registration.*/'rainlab.user::lang.account.redirect_to_desc',
                 'type'        => 'dropdown',
                 'default'     => ''
             ],
             'paramCode' => [
-                'title'       => /*Activation Code Param*/'rainlab.user1::lang.account.code_param',
-                'description' => /*The page URL parameter used for the registration activation code*/ 'rainlab.user1::lang.account.code_param_desc',
+                'title'       => /*Activation Code Param*/'rainlab.user::lang.account.code_param',
+                'description' => /*The page URL parameter used for the registration activation code*/ 'rainlab.user::lang.account.code_param_desc',
                 'type'        => 'string',
                 'default'     => 'code'
             ],
             'forceSecure' => [
-                'title'       => /*Force secure protocol*/'rainlab.user1::lang.account.force_secure',
-                'description' => /*Always redirect the URL with the HTTPS schema.*/'rainlab.user1::lang.account.force_secure_desc',
+                'title'       => /*Force secure protocol*/'rainlab.user::lang.account.force_secure',
+                'description' => /*Always redirect the URL with the HTTPS schema.*/'rainlab.user::lang.account.force_secure_desc',
                 'type'        => 'checkbox',
                 'default'     => 0
             ],
@@ -70,7 +70,7 @@ class Account extends ComponentBase
     public function prepareVars()
     {        
         $this->page['userGroups']  = $this->user()->groups->lists('code');
-        $this->page['user1']                 = $this->user();
+        $this->page['user']                 = $this->user();
         $this->page['canRegister']          = $this->canRegister();
         $this->page['loginAttribute']       = $this->loginAttribute();
         $this->page['loginAttributeLabel']  = $this->loginAttributeLabel();
@@ -107,7 +107,7 @@ class Account extends ComponentBase
     //
 
     /**
-     * Returns the logged in user1, if available
+     * Returns the logged in user, if available
      */
     public function user()
     {
@@ -140,8 +140,8 @@ class Account extends ComponentBase
     public function loginAttributeLabel()
     {
         return Lang::get($this->loginAttribute() == UserSettings::LOGIN_EMAIL
-            ? /*Email*/'rainlab.user1::lang.login.attribute_email'
-            : /*Username*/'rainlab.user1::lang.login.attribute_username'
+            ? /*Email*/'rainlab.user::lang.login.attribute_email'
+            : /*Username*/'rainlab.user::lang.login.attribute_username'
         );
     }
 
@@ -166,7 +166,7 @@ class Account extends ComponentBase
     //
 
     /**
-     * Update the user1
+     * Update the user
      */
     public function onUpdate()
     {
@@ -182,11 +182,11 @@ class Account extends ComponentBase
         {
             if(!post('current_password'))
             {
-                throw new ValidationException(['current_password' => Lang::get('rainlab.user1::lang.account.current_password')]);
+                throw new ValidationException(['current_password' => Lang::get('rainlab.user::lang.account.current_password')]);
             }
 
             if (!$user->checkHashValue('password', post('current_password'))) {
-                throw new ValidationException(['current_password' => Lang::get('rainlab.user1::lang.account.current_password_error')]);
+                throw new ValidationException(['current_password' => Lang::get('rainlab.user::lang.account.current_password_error')]);
             }    
         }
 
@@ -194,10 +194,10 @@ class Account extends ComponentBase
         $user->isAdmin = true;
         $user->save();
 
-        Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'rainlab.user1::lang.account.success_saved')));
+        Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'rainlab.user::lang.account.success_saved')));
 
         /*
-         * Password has changed, reauthenticate the user1
+         * Password has changed, reauthenticate the user
          */
         if (strlen(post('password'))) {
             Auth::login($user->reload(), true);
@@ -214,7 +214,7 @@ class Account extends ComponentBase
     }
 
     /**
-     * Deactivate user1
+     * Deactivate user
      */
     public function onDeactivate()
     {
@@ -223,13 +223,13 @@ class Account extends ComponentBase
         }
 
         if (!$user->checkHashValue('password', post('deactive_password'))) {
-            throw new ValidationException(['deactive_password' => Lang::get('rainlab.user1::lang.account.invalid_deactivation_pass')]);
+            throw new ValidationException(['deactive_password' => Lang::get('rainlab.user::lang.account.invalid_deactivation_pass')]);
         }
 
         Auth::logout();
         $user->delete();
 
-        Flash::success(post('flash', Lang::get(/*Successfully deactivated your account. Sorry to see you go!*/'rainlab.user1::lang.account.success_deactivation')));
+        Flash::success(post('flash', Lang::get(/*Successfully deactivated your account. Sorry to see you go!*/'rainlab.user::lang.account.success_deactivation')));
 
         /*
          * Redirect
@@ -246,14 +246,14 @@ class Account extends ComponentBase
     {
         try {
             if (!$user = $this->user()) {
-                throw new ApplicationException(Lang::get(/*You must be logged in first!*/'rainlab.user1::lang.account.login_first'));
+                throw new ApplicationException(Lang::get(/*You must be logged in first!*/'rainlab.user::lang.account.login_first'));
             }
 
             if ($user->is_activated) {
-                throw new ApplicationException(Lang::get(/*Your account is already activated!*/'rainlab.user1::lang.account.already_active'));
+                throw new ApplicationException(Lang::get(/*Your account is already activated!*/'rainlab.user::lang.account.already_active'));
             }
 
-            Flash::success(Lang::get(/*An activation email has been sent to your email address.*/'rainlab.user1::lang.account.activation_email_sent'));
+            Flash::success(Lang::get(/*An activation email has been sent to your email address.*/'rainlab.user::lang.account.activation_email_sent'));
 
             $this->sendActivationEmail($user);
 
@@ -276,7 +276,7 @@ class Account extends ComponentBase
     //
 
     /**
-     * Returns a link used to activate the user1 account.
+     * Returns a link used to activate the user account.
      * @return string
      */
     protected function makeActivationUrl($code)
@@ -300,7 +300,7 @@ class Account extends ComponentBase
     }
 
     /**
-     * Sends the activation email to a user1
+     * Sends the activation email to a user
      * @param  User $user
      * @return void
      */
@@ -316,7 +316,7 @@ class Account extends ComponentBase
             'code' => $code
         ];
 
-        Mail::send('rainlab.user1::mail.activate', $data, function($message) use ($user) {
+        Mail::send('rainlab.user::mail.activate', $data, function($message) use ($user) {
             $message->to($user->email, $user->name);
         });
     }

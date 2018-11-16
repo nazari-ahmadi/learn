@@ -28,8 +28,8 @@ class UserAttributeCondition extends ModelAttributesConditionBase
 
         $attribute = $hostObj->subcondition;
 
-        if (!$user = array_get($params, 'user1')) {
-            throw new ApplicationException('Error evaluating the user1 attribute condition: the user1 object is not found in the condition parameters.');
+        if (!$user = array_get($params, 'user')) {
+            throw new ApplicationException('Error evaluating the user attribute condition: the user object is not found in the condition parameters.');
         }
 
         return parent::evalIsTrue($user);

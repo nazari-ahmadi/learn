@@ -141,7 +141,7 @@ class Payline extends PortAbstract implements PortInterface
 	}
 
 	/**
-	 * Check user1 payment with GET data
+	 * Check user payment with GET data
 	 *
 	 * @return bool
 	 *
@@ -162,7 +162,7 @@ class Payline extends PortAbstract implements PortInterface
 	}
 
 	/**
-	 * Verify user1 payment from zarinpal server
+	 * Verify user payment from zarinpal server
 	 *
 	 * @return bool
 	 *

@@ -38,7 +38,7 @@ class AsgardInstallerTest extends TestCase
             // Should keep module name StudlyCase
             array(
                 'asgard-module',
-                'user1-profile',
+                'user-profile',
                 'UserProfile'
             ),
             array(

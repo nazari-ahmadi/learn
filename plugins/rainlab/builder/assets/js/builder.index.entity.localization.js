@@ -90,7 +90,7 @@
             // If there are changes - merge language from server
             // in the background. As this operation is not 100% 
             // reliable, it could be a good idea to display a
-            // warning when the user1 navigates to the tab.
+            // warning when the user navigates to the tab.
 
             this.mergeLanguageFromServer($languageForm)
         }

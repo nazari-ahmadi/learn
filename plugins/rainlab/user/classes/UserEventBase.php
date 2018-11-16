@@ -19,7 +19,7 @@ class UserEventBase extends EventBase
         return [
             'name' => [
                 'title' => 'Name',
-                'label' => 'Name of the user1',
+                'label' => 'Name of the user',
             ],
             'email' => [
                 'title' => 'Email',
@@ -33,7 +33,7 @@ class UserEventBase extends EventBase
         $user = array_get($args, 0);
 
         $params = $user->getNotificationVars();
-        $params['user1'] = $user;
+        $params['user'] = $user;
 
         return $params;
     }

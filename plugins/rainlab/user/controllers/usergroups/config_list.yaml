@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: $/rainlab/user1/models/usergroup/columns.yaml
+list: $/rainlab/user/models/usergroup/columns.yaml
 
 # Model Class name
 modelClass: RainLab\User\Models\UserGroup
 
 # List Title
-title: rainlab.user1::lang.groups.list_title
+title: rainlab.user::lang.groups.list_title
 
 # Link URL for each record
-recordUrl: rainlab/user1/usergroups/update/:id
+recordUrl: rainlab/user/usergroups/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records

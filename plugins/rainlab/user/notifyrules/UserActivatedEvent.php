@@ -11,8 +11,8 @@ class UserActivatedEvent extends UserEventBase
     {
         return [
             'name'        => 'Activated',
-            'description' => 'A user1 is activated',
-            'group'       => 'user1'
+            'description' => 'A user is activated',
+            'group'       => 'user'
         ];
     }
 }

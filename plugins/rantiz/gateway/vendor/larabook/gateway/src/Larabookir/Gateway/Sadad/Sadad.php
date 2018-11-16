@@ -143,7 +143,7 @@ class Sadad extends PortAbstract implements PortInterface
 	}
 
 	/**
-	 * Verify user1 payment from bank server
+	 * Verify user payment from bank server
 	 *
 	 * @throws SadadException
 	 */

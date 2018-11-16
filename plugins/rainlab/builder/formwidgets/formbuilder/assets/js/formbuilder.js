@@ -2,7 +2,7 @@
  * Form Builder widget class.
  *
  * There is only a single instance of the Form Builder class and it handles
- * as many form builder user1 interfaces as needed.
+ * as many form builder user interfaces as needed.
  *
  */
 +function ($) { "use strict";

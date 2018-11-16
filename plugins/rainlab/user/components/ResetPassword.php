@@ -12,7 +12,7 @@ use RainLab\User\Models\User as UserModel;
 /**
  * Password reset workflow
  *
- * When a user1 has forgotten their password, they are able to reset it using
+ * When a user has forgotten their password, they are able to reset it using
  * a unique token that, sent to their email address upon request.
  */
 class ResetPassword extends ComponentBase
@@ -20,8 +20,8 @@ class ResetPassword extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => /*Reset Password*/'rainlab.user1::lang.reset_password.reset_password',
-            'description' => /*Forgotten password form.*/'rainlab.user1::lang.reset_password.reset_password_desc'
+            'name'        => /*Reset Password*/'rainlab.user::lang.reset_password.reset_password',
+            'description' => /*Forgotten password form.*/'rainlab.user::lang.reset_password.reset_password_desc'
         ];
     }
 
@@ -29,8 +29,8 @@ class ResetPassword extends ComponentBase
     {
         return [
             'paramCode' => [
-                'title'       => /*Reset Code Param*/'rainlab.user1::lang.reset_password.code_param',
-                'description' => /*The page URL parameter used for the reset code*/'rainlab.user1::lang.reset_password.code_param_desc',
+                'title'       => /*Reset Code Param*/'rainlab.user::lang.reset_password.code_param',
+                'description' => /*The page URL parameter used for the reset code*/'rainlab.user::lang.reset_password.code_param_desc',
                 'type'        => 'string',
                 'default'     => 'code'
             ]
@@ -75,7 +75,7 @@ class ResetPassword extends ComponentBase
         }
 
         if (!$user = UserModel::findByEmail(post('email'))) {
-            throw new ApplicationException(Lang::get(/*A user1 was not found with the given credentials.*/'rainlab.user1::lang.account.invalid_user'));
+            throw new ApplicationException(Lang::get(/*A user was not found with the given credentials.*/'rainlab.user::lang.account.invalid_user'));
         }
 
         $code = implode('!', [$user->id, $user->getResetPasswordCode()]);
@@ -88,7 +88,7 @@ class ResetPassword extends ComponentBase
             'code' => $code
         ];
 
-        Mail::send('rainlab.user1::mail.restore', $data, function($message) use ($user) {
+        Mail::send('rainlab.user::mail.restore', $data, function($message) use ($user) {
             $message->to($user->email, $user->full_name);
         });
     }
@@ -108,7 +108,7 @@ class ResetPassword extends ComponentBase
             throw new ValidationException($validation);
         }
 
-        $errorFields = ['code' => Lang::get(/*Invalid activation code supplied.*/'rainlab.user1::lang.account.invalid_activation_code')];
+        $errorFields = ['code' => Lang::get(/*Invalid activation code supplied.*/'rainlab.user::lang.account.invalid_activation_code')];
 
         /*
          * Break up the code parts
@@ -138,7 +138,7 @@ class ResetPassword extends ComponentBase
     //
 
     /**
-     * Returns a link used to reset the user1 account.
+     * Returns a link used to reset the user account.
      * @return string
      */
     protected function makeResetUrl($code)
