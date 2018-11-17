@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class CreateUsersTable extends Migration
+class AddWalletToUser extends Migration
 {
     public function up()
     {
