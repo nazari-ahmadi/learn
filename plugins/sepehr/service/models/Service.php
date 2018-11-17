@@ -62,6 +62,7 @@ class Service extends Model
         }
     }
 
+
     public function getPostType($id)
     {
         return PostType::find($id)->name;
