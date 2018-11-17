@@ -16,7 +16,6 @@ use Carbon\Carbon;
 
 class Users extends Controller
 {
-
     /**
      * @var array Extensions implemented by this controller.
      */

@@ -45,7 +45,17 @@ class User extends UserBase
         'mobile.required'           => 'لطفا موبایل را وارد کنید.',
         'mobile.unique'             => 'موبایل وارد شده تکراری می باشد.',   
         'mobile.regex'              => 'فرمت شماره موبایل وارد شده نامعتبر است.', 
-        'country_code.required'     => 'لطفا کد کشور را انتخاب کنید.'    
+        'country_code.required'     => 'لطفا کد کشور را انتخاب کنید.',
+        'email.required'            => 'لطفا ایمیل را وارد کنید.',
+        'email.unique'              => 'ایمیل وارد شده تکراری می باشد.',
+        'email.email'               => 'قالب ایمیل نامعتبر است.',
+        'email.between'             => 'ایمیل باید بین 6 و 255 کاراکتر باشد.',
+        'password.required'         => 'لطفا رمز عبور را وارد کنید.',
+        'password.between'          => 'رمز عبور باید بین 4 و 255 کاراکتر باشد.',
+        'password.confirmed'        => 'رمز عبور با تدییدیه اش یکسان نیست.',
+        'username.required'         => 'لطفا نام کاربری را وارد کنید.',
+        'username.unique'           => 'نام کاربری وارد شده تکراری می باشد.',
+        'username.between'          => 'نام کاربری باید بین 2 و 255 کاراکتر باشد.',        
     ];
 
     /**
@@ -63,9 +73,11 @@ class User extends UserBase
      * @var array The attributes that are mass assignable.
      */
     protected $fillable = [
-        'name',
-        'surname',
-        'login',
+        'first_name',
+        'last_name',
+        'country_code',
+        'mobile',
+        'national_code',
         'username',
         'email',
         'password',
