@@ -10,13 +10,13 @@ class BuilderTableCreateSepehrServiceIndex extends Migration
         Schema::create('sepehr_service_index', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->bigInteger('id');
+            $table->increments('id');
             $table->bigInteger('user_id')->nullable();
             $table->integer('manager_id')->nullable();
             $table->text('packages')->nullable();
             $table->text('postmans')->nullable();
             $table->integer('operator_id')->nullable();
-            $table->integer('payment_type_id')->nullable();
+//            $table->integer('payment_type_id')->nullable();
             $table->dateTime('operator_recorded_at')->nullable();
             $table->dateTime('operator_received_at')->nullable();
             $table->text('payments')->nullable();
