@@ -50,3 +50,6 @@
 1.0.17:
     - 'Created table sepehr_details_weight'
     - builder_table_create_sepehr_details_weight.php
+1.0.18:
+    - 'Seed Data'
+    - Seed.php
