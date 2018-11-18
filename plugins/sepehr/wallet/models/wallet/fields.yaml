@@ -1,5 +1,0 @@
-fields:
-    wallet_charge:
-        label: 'مبلغ شارژ'
-        span: auto
-        type: number

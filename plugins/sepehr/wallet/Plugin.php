@@ -1,6 +1,7 @@
 <?php namespace Sepehr\wallet;
 
 use Backend;
+
 use Sepehr\Wallet\Components\Wallet;
 use System\Classes\PluginBase;
 
@@ -8,6 +9,9 @@ class Plugin extends PluginBase
 {
     public function registerComponents()
     {
+        return [
+            Wallet::class => 'walletComponent'
+        ];
     }
 
     public function registerSettings()
@@ -16,9 +20,7 @@ class Plugin extends PluginBase
 
     public function registerFormWidgets()
     {
-        return [
-            Wallet::class => 'walletComponent'
-        ];
+
     }
 
     public function registerPermissions()
