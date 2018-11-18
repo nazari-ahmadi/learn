@@ -1,0 +1,6 @@
+plugin:
+    name: 'sepehr.wallet::lang.plugin.name'
+    description: 'sepehr.wallet::lang.plugin.description'
+    author: sepehr
+    icon: oc-icon-google-wallet
+    homepage: ''

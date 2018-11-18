@@ -7,7 +7,7 @@ use Gateway;
 use Lang;
 use Redirect;
 use Auth;
-use Sepehr\Service\Components\Wallet;
+use Sepehr\Wallet\Components\Wallet;
 use Sepehr\Service\Models\Service;
 use Session;
 
@@ -59,6 +59,8 @@ class Verify extends ComponentBase
      
             $gateway = Gateway::verify($id);
 
+           // throw new \ApplicationException($gateway->statusCode());
+
             if($gateway == "refresh")
             {
                 return Redirect::to(url(""));
@@ -71,9 +73,11 @@ class Verify extends ComponentBase
             {
                 return Redirect::to(url("bankError"))->withErrors(["code" => 3, "title" => "چنین رکورد پرداختی موجود نمی باشد"]);                                        
             }
-            if($gateway->statusCode() == "0")
+            if($gateway->statusCode() == null)
             {
-
+                $user=Auth::getUser();
+                $user->wallet_charge += $gateway->amount();
+                $user->forceSave();
                 $this->checkIfPay();
                 $this->page['trackingCode']  = $gateway->trackingCode();
                 $this->page['refId']         = $gateway->refId();

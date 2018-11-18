@@ -68,8 +68,7 @@ class Plugin extends PluginBase
             ServiceList::class => 'serviceList',
             ReferralPostman::class => 'referralPostman',
             PostmanServices::class => 'PostmanServices',
-            ServiceDelivery::class => 'ServiceDelivery',
-            Wallet::class => 'walletComponent'
+            ServiceDelivery::class => 'ServiceDelivery'
         ];
     }
 

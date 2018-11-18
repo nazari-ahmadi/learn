@@ -165,7 +165,7 @@ class Register extends ComponentBase
              * Validate input
              */
             $data = post();
-            
+          
             if (!array_key_exists('password_confirmation', $data)) {
                 $data['password_confirmation'] = post('password');
             }
@@ -179,35 +179,39 @@ class Register extends ComponentBase
             }
 
             // $rules = [
-            //     'firstName'             => 'required|max:50',
-            //     'lastName'              => 'required|max:50',                
-            //     'email'                 => 'required|between:6,50|email|unique:users',   
-            //     'password'              => 'required:create|between:4,50',
+            //     'first_name'            => 'required',
+            //     'last_name'             => 'required',    
+            //     'country_code'          => 'required',    
             //     'mobile'                => ['required', 'regex:/^([9]{1})+[0-9]{9}$/i', 'unique:users'],
-            //     'country_code'          => 'required',
+            //     'national_code'         => 'unique:users',
+            //     'email'                 => 'required|between:6,255|email|unique:users',
+            //     'password'              => 'required:create|between:4,255|confirmed',
+            //     'password_confirmation' => 'required_with:password|between:4,255',
             // ];
 
             // if ($this->loginAttribute() == UserSettings::LOGIN_USERNAME) {
-            //     $rules['username'] = 'required|between:2,50|unique:users';
+            //     $rules['username'] = 'required|between:2,255|unique:users';
             // }            
 
             // $message = [
-            //     'firstName.required'       => 'لطفا نام خود را وارد کنید.',
-            //     'firstName.max'            => 'نام نمی تواند بیشتر از 50 حرف باشد.',
-            //     'lastName.required'        => 'لطفا نام خانوادگی خود را وارد کنید.',
-            //     'lastName.max'             => 'نام خانوادگی نمی تواند بیشتر از 50 حرف باشد.',
-            //     'mobile.required'          => 'لطفا شماره موبایل خود را وارد کنید.',
-            //     'mobile.regex'             => 'فرمت شماره موبایل وارد شده نامعتبر است.',
-            //     'mobile.unique'            => 'شماره موبایل وارد شده تکراری می باشد.',
-            //     'username.required'        => 'لطفا نام کاربری را وارد کنید.',
-            //     'username.unique'          => 'نام کاربری وارد شده تکراری می باشد.',     
-            //     'username.between'         => 'نام کاربری حداقل باید 2 کاراکتر و حداکثر 50 کاراکتر باشد.',  
-            //     'email.required'           => 'لطفا پست الکترونیکی خود را وارد کنید.',
-            //     'email.between'            => 'پست الکترونیکی باید مابین 6 و 50 کاراکتر باشد.',
-            //     'email.email'              => 'قالب پست الکترونیکی نامعتبر است.',
-            //     'email.unique'             => 'پست الکترونیکی وارد شده تکراری می باشد.',
-            //     'password.required'        => 'لطفا رمز عبور خود را وارد کنید.',
-            //     'password.between'         => 'رمز عبور باید مابین 4 و 50 کاراکتر باشد.',
+            //     'first_name.required'       => 'لطفا نام را وارد کنید.',
+            //     'last_name.required'        => 'لطفا نام خانوادگی را وارد کنید.',
+            //     'national_code.required'    => 'لطفا کد ملی را وارد کنید.',
+            //     'national_code.unique'      => 'کد ملی وارد شده تکراری می باشد.',
+            //     'mobile.required'           => 'لطفا موبایل را وارد کنید.',
+            //     'mobile.unique'             => 'موبایل وارد شده تکراری می باشد.',   
+            //     'mobile.regex'              => 'فرمت شماره موبایل وارد شده نامعتبر است.', 
+            //     'country_code.required'     => 'لطفا کد کشور را انتخاب کنید.',
+            //     'email.required'            => 'لطفا ایمیل را وارد کنید.',
+            //     'email.unique'              => 'ایمیل وارد شده تکراری می باشد.',
+            //     'email.email'               => 'قالب ایمیل نامعتبر است.',
+            //     'email.between'             => 'ایمیل باید بین 6 و 255 کاراکتر باشد.',
+            //     'password.required'         => 'لطفا رمز عبور را وارد کنید.',
+            //     'password.between'          => 'رمز عبور باید بین 4 و 255 کاراکتر باشد.',
+            //     'password.confirmed'        => 'رمز عبور با تدییدیه اش یکسان نیست.',
+            //     'username.required'         => 'لطفا نام کاربری را وارد کنید.',
+            //     'username.unique'           => 'نام کاربری وارد شده تکراری می باشد.',
+            //     'username.between'          => 'نام کاربری باید بین 2 و 255 کاراکتر باشد.',                 
             // ];
 
             // $validation = Validator::make($data, $rules, $message);

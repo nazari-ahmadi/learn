@@ -1,0 +1,6 @@
+plugin:
+    name: 'sepehr.report::lang.plugin.name'
+    description: 'sepehr.report::lang.plugin.description'
+    author: sepehr
+    icon: oc-icon-book
+    homepage: ''
