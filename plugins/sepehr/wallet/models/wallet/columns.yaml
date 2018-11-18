@@ -1,0 +1,16 @@
+columns:
+    id:
+        label: کد
+        type: text
+        searchable: true
+        sortable: true
+        width: 5%
+    user_id:
+        label: کاربر
+        type: text
+        searchable: true
+        sortable: true
+    wallet_charge:
+        label: 'میزان شارژ کیف پول'
+        type: text
+        sortable: true
