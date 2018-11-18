@@ -7,7 +7,7 @@ use Gateway;
 use Lang;
 use Redirect;
 use Auth;
-use Sepehr\Service\Components\Wallet;
+use Sepehr\Wallet\Components\Wallet;
 use Sepehr\Service\Models\Service;
 use Session;
 
