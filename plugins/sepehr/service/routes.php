@@ -11,7 +11,7 @@ Route::get('/seed-service', function () {
 
     for ($i = 1; $i <= 20; $i++) {
         Service::create([
-            'user_id' => '1',
+            'user_id' => 1,
             'manager_id' => null,
             'operator_id' => null,
             'operator_recorded_at' => null,
