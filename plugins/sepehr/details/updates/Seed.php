@@ -17,6 +17,7 @@ use Sepehr\Details\Models\PackageType;
 use Sepehr\Details\Models\PostType;
 use Sepehr\Details\Models\Status;
 use Sepehr\Details\Models\CountryCode;
+use Sepehr\Details\Models\PaymentType;
 
 class Seed extends Seeder
 {
@@ -25,54 +26,56 @@ class Seed extends Seeder
      */
     public function run()
     {
-        Sex::create(['name'=>'زن']);
-        Sex::create(['name'=>'مرد']);
-
-        Weight::create(['name'=>'کمتر از 250 گرم']);
-        Weight::create(['name'=>'بین 250 گرم تا 500 گرم']);
-        Weight::create(['name'=>'بین 1 کیلوگرم تا 2 کیلوگرم']);
+        Sex::create(['name' => 'مرد']);
+        Sex::create(['name' => 'زن']);
 
 
-        SpecialService::create(['name'=>'پیامک']);
-        SpecialService::create(['name'=>'بازه زمانی']);
+        Weight::create(['name' => 'کمتر از 250 گرم']);
+        Weight::create(['name' => 'بین 250 گرم تا 500 گرم']);
+        Weight::create(['name' => 'بین 1 کیلوگرم تا 2 کیلوگرم']);
 
 
-         CountryCode::create([
-             'name'=>'ایران',
-             'code'=>'+98',
-             'placeholder'=>'',
-             ]);
-
-         Acceptance::create(['name'=>'نامشخص']);
-         Acceptance::create(['name'=>'قبول']);
-         Acceptance::create(['name'=>'رد']);
+        SpecialService::create(['name' => 'پیامک']);
+        SpecialService::create(['name' => 'بازه زمانی']);
 
 
-        PostType::create(['name'=>'عادی']);
-        PostType::create(['name'=>'پیشتاز']);
-        PostType::create(['name'=>'ویژه']);
+        CountryCode::create([
+            'name' => 'ایران',
+            'code' => '+98',
+            'placeholder' => '',
+        ]);
+
+        Acceptance::create(['name' => 'نامشخص']);
+        Acceptance::create(['name' => 'پذیرش شده']);
+        Acceptance::create(['name' => 'رد شده']);
 
 
-        DistributionTime::create(['name'=>'بین 8 صبح تا 12 صبح']);
-        DistributionTime::create(['name'=>'بین 14 تا 17']);
+        PostType::create(['name' => 'عادی']);
+        PostType::create(['name' => 'پیشتاز']);
+        PostType::create(['name' => 'ویژه']);
 
 
-
-        PackageType::create(['name'=>'پاکت']);
-        PackageType::create(['name'=>'جعبه']);
-
-
-        Status::create(['name'=>'ثبت شده']);
-        Status::create(['name'=>'ارجاع شده']);
-        Status::create(['name'=>'قبول توسط مامور پست']);
-        Status::create(['name'=>'در حال تحویل ']);
+        DistributionTime::create(['name' => 'بین 8 صبح تا 12 صبح']);
+        DistributionTime::create(['name' => 'بین 14 تا 17']);
 
 
+        PackageType::create(['name' => 'پاکت']);
+        PackageType::create(['name' => 'جعبه']);
 
-        InsuranceType::create(['name'=>'بیمه ایران']);
-        InsuranceType::create(['name'=>'بیمه آسیا']);
+
+        Status::create(['name' => 'ثبت شده']);
+        Status::create(['name' => 'ارجاع شده']);
+        Status::create(['name' => 'پذیرفته شده']);
+        Status::create(['name' => 'تحویل گرفته شده']);
 
 
+        InsuranceType::create(['name' => 'بیمه ایران']);
+        InsuranceType::create(['name' => 'بیمه آسیا']);
+
+        PaymentType::create(['name' => 'کیف پول']);
+        PaymentType::create(['name' => 'نقدی']);
+        PaymentType::create(['name' => 'کارت خوان']);
+        PaymentType::create(['name' => 'پرداخت اینترنتی']);
 
     }
 }
