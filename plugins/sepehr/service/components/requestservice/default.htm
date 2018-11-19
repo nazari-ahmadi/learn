@@ -33,28 +33,28 @@
                             >
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="transaction_code" class="control-label">کد پیگیری</label>
-                            <input disabled type="text" class="form-control"
-                                   name="transaction_code"
-                                   id="transaction_code"
-                                   value="{{ form_value('transaction_code') }}"
-                            >
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="status_id" class="control-label">وضعیت سرویس</label>
-                            <select disabled name="status_id" id="status_id" class="form-control">
-                                <option value="0">نامشخص</option>
-                                {% for item in statuses %}
-                                    <option value="{{ item.id }}">{{ item.name }} </option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
+<!--                    <div class="col-md-12">-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="transaction_code" class="control-label">کد پیگیری</label>-->
+<!--                            <input disabled type="text" class="form-control"-->
+<!--                                   name="transaction_code"-->
+<!--                                   id="transaction_code"-->
+<!--                                   value="{{ form_value('transaction_code') }}"-->
+<!--                            >-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="col-md-12">-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="status_id" class="control-label">وضعیت سرویس</label>-->
+<!--                            <select disabled name="status_id" id="status_id" class="form-control">-->
+<!--                                <option value="0">نامشخص</option>-->
+<!--                                {% for item in statuses %}-->
+<!--                                    <option value="{{ item.id }}">{{ item.name }} </option>-->
+<!--                                {% endfor %}-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <ul class="nav nav-tabs nav-primary">
                         <li class="active"><a href="#tab2_1" data-toggle="tab">اطلاعات مرسوله</a></li>
@@ -211,6 +211,7 @@
                             </select>
                         </div>
                     </div>
+
 
                 </div>
                 <div class="clearfix"></div>

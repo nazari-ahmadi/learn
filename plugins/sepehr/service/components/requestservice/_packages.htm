@@ -10,6 +10,7 @@
             <th>نوع بسته</th>
             <th> تعداد آیتم</th>
             <th>وزن</th>
+            <th>قیمت</th>
             <th>عملیات</th>
         </tr>
         </thead>
@@ -25,6 +26,7 @@
                 <td>{{ service.getPackageType(item.package_type_id) }}</td>
                 <td>{{ item.package_number }}</td>
                 <td>{{ service.getWeight(item.weight_id) }}</td>
+                <td>{{ item.price }}</td>
                 <td>
                     <a
                             href="#"

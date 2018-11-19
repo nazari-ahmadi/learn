@@ -128,9 +128,9 @@ class RequestService extends ComponentBase
             $packages[$id]['insurance_type_id']    = post('insurance_type_id');
             $packages[$id]['distribution_time_id'] = post('distribution_time_id');
             $packages[$id]['special_services_id']  = post('special_services_id');
+            $packages[$id]['price']                = $this->calculatePrice();
         }else{
             $packages[] = [
-                'id'=> '0',
                 'is_rejected' => false,
                 'package_number' => post('package_number'),
                 'receiver_postal_code' => post('receiver_postal_code'),
@@ -139,13 +139,13 @@ class RequestService extends ComponentBase
                 'distribution_time_id' => post('distribution_time_id'),
                 'weight_id' => post('weight_id'),
                 'special_services_id' => post('special_services_id'),
-                'price' => 0,
                 'package_type_id' => post('package_type_id'),
                 'insurance_type_id' => post('insurance_type_id'),
                 'transaction_code' => post('transaction_code'),
                 'points' => post('points'),
-
+                'price' => $this->calculatePrice(),
             ];
+
         }
 
 //        throw new \ApplicationException(print_r($packages));
@@ -160,7 +160,9 @@ class RequestService extends ComponentBase
      * @throws ValidationException
      */
 
-
+    private function calculatePrice(){
+        return 1000;
+    }
     public function onPackageDelete()
     {
 //        throw new ApplicationException(post('id'));

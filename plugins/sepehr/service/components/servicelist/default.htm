@@ -19,6 +19,7 @@
             <th>آدرس مبدا</th>
             <th>وضعیت تراکنش</th>
             <th>تاریخ درخواست</th>
+            <th>هزینه بسته</th>
             <th>عملیات</th>
         </tr>
         </thead>
@@ -32,6 +33,7 @@
                 <td>{{ item.sender_address }}</td>
                 <td>{{ service.getStatus(item.status_id) }}</td>
                 <td>{{ item.created_at }}</td>
+                <td>{{servicelist.servicePrice(item)}}</td>
                 <td>
                     <a
                             href="{{ url('serviceupdate') ~ '/' ~ item.id }}"

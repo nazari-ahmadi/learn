@@ -25,6 +25,7 @@ class ServiceList extends ComponentBase
         $user = Auth::getUser();
         $this->page['lists'] = Service::whereUserId($user->id)->orderBy('id', 'desc')->get();
         $this->page['service'] = new Service();
+        $this->page['servicelist'] = new ServiceList();
     }
 
     public function onRun()
@@ -45,5 +46,10 @@ class ServiceList extends ComponentBase
         return Redirect::refresh();
     }
 
+    public function servicePrice($service)
+    {
+        $serviceDelivery=new ServiceDelivery();
+        return $serviceDelivery->calculatePrice($service->packages);
+    }
 
 }
