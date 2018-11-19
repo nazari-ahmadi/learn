@@ -6,6 +6,7 @@
  * Time: 10:25 AM
  */
 
+use RainLab\User\Models\UserGroup;
 use Sepehr\Details\Models\Sex;
 use October\Rain\Database\Updates\Seeder;
 use Sepehr\Details\Models\SpecialService;
@@ -76,6 +77,12 @@ class Seed extends Seeder
         PaymentType::create(['name' => 'نقدی']);
         PaymentType::create(['name' => 'کارت خوان']);
         PaymentType::create(['name' => 'پرداخت اینترنتی']);
+
+
+        UserGroup::create(['name'=>'Guest','code'=>'guest']);
+        UserGroup::create(['name'=>'Registered','code'=>'registered']);
+        UserGroup::create(['name'=>'Customer','code'=>'customer']);
+        UserGroup::create(['name'=>'Postmans','code'=>'postmans']);
 
     }
 }
