@@ -1,5 +1,4 @@
 <?php namespace Rantiz\Gateway\Components;
-
 use Cms\Classes\ComponentBase;
 use Exception;
 use Flash;
@@ -22,7 +21,6 @@ class Verify extends ComponentBase
      * @var string Reference to the page name for linking to categories.
      */
     public $categoryPage;
-
     public function componentDetails()
     {
         return [
@@ -30,7 +28,6 @@ class Verify extends ComponentBase
             'description' => 'مشاهده نتیجه برگشتی از سمت درگاه بانک'
         ];
     }
-
     public function defineProperties()
     {
         return [
@@ -47,20 +44,16 @@ class Verify extends ComponentBase
             //     'default'     => '1',
             //     'placeholder' => 'انتخاب کنید',
             //     'options'     => ['1'=>'ثبت نام در دوره', '2'=>'یادگیری الکترونیک']
-            // ],            
+            // ],
         ];
-    }  
-
+    }
     public function onRun()
     {
         $id = $_GET['transaction_id'];
-
         try {
-     
+
             $gateway = Gateway::verify($id);
-
-           // throw new \ApplicationException($gateway->statusCode());
-
+            // throw new \ApplicationException($gateway->statusCode());
             if($gateway == "refresh")
             {
                 return Redirect::to(url(""));
@@ -71,14 +64,11 @@ class Verify extends ComponentBase
             }
             else if($gateway == "NotFoundTransactionException")
             {
-                return Redirect::to(url("bankError"))->withErrors(["code" => 3, "title" => "چنین رکورد پرداختی موجود نمی باشد"]);                                        
+                return Redirect::to(url("bankError"))->withErrors(["code" => 3, "title" => "چنین رکورد پرداختی موجود نمی باشد"]);
             }
             if($gateway->statusCode() == null)
             {
-                $user=Auth::getUser();
-                $user->wallet_charge += $gateway->amount();
-                $user->forceSave();
-                $this->checkIfPay();
+                $this->checkIfPay($gateway);
                 $this->page['trackingCode']  = $gateway->trackingCode();
                 $this->page['refId']         = $gateway->refId();
                 $this->page['cardNumber']    = $gateway->cardNumber();
@@ -89,28 +79,42 @@ class Verify extends ComponentBase
             }
             else if($gateway->statusCode() == "-1")
             {
-                return Redirect::to(url("bankError"))->withErrors(["code" => 1, "title" => "انصراف از پرداخت"]);  
+                return Redirect::to(url("bankError"))->withErrors(["code" => 1, "title" => "انصراف از پرداخت"]);
             }
             else
             {
                 return Redirect::to(url(""));
             }
-
         } catch (Exception $e) {
-     
-            echo $e->getMessage();
-        }  
-    }
 
-    public function checkIfPay()
+            echo $e->getMessage();
+        }
+    }
+    public function checkIfPay($gateway)
     {
-        if ($id=Session::get('servicePay')!=null){
-            $wallet=new Wallet();
-            $service=Service::find($id);
+        $wallet=new Wallet();
+        $user=Auth::getUser();
+        $id=Session::get('servicePay');
+        $service=Service::find($id);
+        if ($id!=null){
             if ($wallet->PayService($service)){
                 Session::forget('servicePay');
                 Flash::success('پرداخت با موفقیت انجام شد');
+            }else{
+                $amount=$gateway->amount();
+                $payList=$service->payments;
+                $payList[]=['payment_status_id'=>4 , 'amount'=>$amount,'payment_date'=>''];
+                $service->payments=$payList;
+                $service->payment_status=1;
+                $service->forceSave();
+                $user->wallet_charge = 0;
+                $user->forceSave();
+                Session::forget('servicePay');
+                Flash::success('پرداخت با موفقیت انجام شد');
             }
+        }else{
+            $user->wallet_charge += $gateway->amount();
+            $user->forceSave();
         }
     }
 }
