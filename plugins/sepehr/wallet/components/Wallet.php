@@ -1,5 +1,4 @@
 <?php namespace Sepehr\Wallet\Components;
-
 use Auth;
 use Cms\Classes\ComponentBase;
 use Exception;
@@ -10,8 +9,6 @@ use RainLab\User\Models\User;
 use Gateway;
 use Lang;
 use Session;
-
-
 class Wallet extends ComponentBase
 {
     public function componentDetails()
@@ -21,13 +18,10 @@ class Wallet extends ComponentBase
             'description' => 'کامپوننت کنترل کیف پول کاربر'
         ];
     }
-
     public function defineProperties()
     {
         return [];
     }
-
-
     public function preVars()
     {
         $user = Auth::getUser();
@@ -38,19 +32,15 @@ class Wallet extends ComponentBase
         $this->page['service']=new Service();
         $this->page['Wallet']=new Wallet();
     }
-
     public function onRun()
     {
         $this->preVars();
     }
-
     public function onWalletCharge()
     {
         $price=post('price');
         return Redirect::to(url('payment'))->with(['price'=>$price]);
     }
-
-
     public function onServicePayment()
     {
         $id=post('id');
@@ -63,9 +53,7 @@ class Wallet extends ComponentBase
             $price=$this->getNotPay($service) - $user->wallet_charge;
             return Redirect::to(url('payment'))->with(['price'=>$price]);
         }
-
     }
-
     public function PlusWallet($amount,$user,$boolPlus)
     {
         if ($boolPlus){
@@ -75,7 +63,6 @@ class Wallet extends ComponentBase
         }
         $user->save();
     }
-
     public function getPay($service)
     {
         $pay=0;
@@ -86,7 +73,6 @@ class Wallet extends ComponentBase
         }
         return $pay;
     }
-
     public function getNotPay($service)
     {
         $total=0;
@@ -98,7 +84,6 @@ class Wallet extends ComponentBase
         $notPay = $total - $this->getPay($service);
         return $notPay;
     }
-
     public function PayService($service)
     {
         $notPayment=$this->getNotPay($service);
