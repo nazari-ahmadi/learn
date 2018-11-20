@@ -107,7 +107,7 @@ class Wallet extends ComponentBase
                     $amount=$user->wallet_charge;
                     $this->PlusWallet($amount,$user,false);
                     $payList=$service->payments;
-                    $payList[]=['payment_status_id'=>1 , 'amount'=>$amount,'payment_date'=>''];
+                    $payList[]=['payment_type_id'=>1 , 'amount'=>$amount,'payment_date'=>''];
                     $service->payments=$payList;
                     $service->save();
                     $user->save();
