@@ -111,7 +111,7 @@ class Wallet extends ComponentBase
             if ($user->wallet_charge>=$notPayment){
                 $this->PlusWallet($notPayment,$user,false);
                 $payList=$service->payments;
-                $payList[]=['payment_status_id'=>1 , 'amount'=>$notPayment,'payment_date'=>''];
+                $payList[]=['payment_type_id'=>1 , 'amount'=>$notPayment,'payment_date'=>''];
                 $service->payments=$payList;
                 $service->payment_status=1;
                 $service->forceSave();
