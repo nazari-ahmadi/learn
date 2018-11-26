@@ -2,6 +2,7 @@
 
 use Backend\Classes\FormWidgetBase;
 use Sepehr\Details\Models\PaymentType;
+use Sepehr\Service\Controllers\Services;
 use Sepehr\Service\Models\Service;
 
 /**
@@ -35,7 +36,7 @@ class Payments extends FormWidgetBase
      */
     public function prepareVars()
     {
-        $this->vars['service'] = new Service();
+        $this->vars['service'] = new Services();
         $this->vars['name'] = $this->formField->getName();
         $this->vars['value'] = $this->getLoadValue();
         $this->vars['model'] = $this->model;
@@ -75,7 +76,7 @@ class Payments extends FormWidgetBase
         }
         $this->model->payments = $payments;
         $this->model->save();
-        $this->vars['service'] = new Service();
+        $this->vars['service'] = new Services();
         $this->vars['model'] = $this->model;
 
     }
@@ -91,7 +92,7 @@ class Payments extends FormWidgetBase
         }
         $this->model->payments = $payments;
         $this->model->save();
-        $this->vars['service'] = new Service();
+        $this->vars['service'] = new Services();
         $this->vars['model']=$this->model;
     }
 

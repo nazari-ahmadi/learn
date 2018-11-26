@@ -13,126 +13,126 @@ fields:
         type: dropdown
 tabs:
     fields:
+#        packages:
+#            label: 'بسته های پستی'
+#            prompt: 'افزودن بسته جدید'
+#            span: full
+#            type: repeater
+#            tab: مرسوله
+#            form:
+#                fields:
+#                    receiver_postal_code:
+#                        label: 'کد پستی مقصد'
+#                        span: auto
+#                        type: text
+#                    receiver_address:
+#                        label: 'آدرس مقصد'
+#                        span: auto
+#                        type: text
+#                    weight_id:
+#                        label: وزن
+#                        span: auto
+#                        type: dropdown
+#                    post_type_id:
+#                        label: 'نحوه ارسال'
+#                        span: auto
+#                        type: dropdown
+#                    distribution_time_id:
+#                        label: 'بازه تحویل بسته پستی'
+#                        span: auto
+#                        type: dropdown
+#                    special_services_id:
+#                        label: 'خدمات ویژه'
+#                        span: auto
+#                        type: dropdown
+#                    price:
+#                        label: 'هزینه خدمات'
+#                        span: auto
+#                        type: number
+#                    package_type_id:
+#                        label: 'نوع بسته'
+#                        span: auto
+#                        type: dropdown
+#                    insurance_type_id:
+#                        label: 'نوع بیمه'
+#                        span: auto
+#                        type: dropdown
+#                    points:
+#                        label: 'نقاط GPS'
+#                        span: auto
+#                        disabled: 1
+#                        context:
+#                            - preview
+#                        type: text
+#                    transaction_code:
+#                        label: 'کد پیگیری'
+#                        span: auto
+#                        type: text
+#                    package_number:
+#                        label: 'تعداد بسته'
+#                        span: auto
+#                        type: number
+#                    is_rejected:
+#                        label: 'قبول شده'
+#                        span: auto
+#                        default: 0
+#                        type: switch
+#        postmans:
+#            label: پستچی
+#            prompt: 'Add new item'
+#            span: full
+#            type: repeater
+#            tab: پستچی
+#            form:
+#                fields:
+#                    postman_id:
+#                        label: پستچی
+#                        span: auto
+#                        type: dropdown
+#                    acceptance_id:
+#                        label: 'وضعیت پذیرش'
+#                        span: auto
+#                        type: dropdown
+#                    accepted_at:
+#                        label: 'تاریخ پذیرش یا رد'
+#                        mode: datetime
+#                        span: auto
+#                        type: datepicker
+#                    receive_at:
+#                        label: 'تاریخ دریافت'
+#                        mode: datetime
+#                        span: auto
+#                        type: datepicker
+#        payments:
+#            label: 'پرداخت هزینه سرویس'
+#            prompt: 'Add new item'
+#            span: full
+#            type: repeater
+#            tab: پرداخت
+#            form:
+#                fields:
+#                    payment_type_id:
+#                        label: 'نوع پرداخت'
+#                        span: auto
+#                        type: dropdown
+#                    amount:
+#                        label: 'مبلغ پرداختی'
+#                        span: auto
+#                        type: number
+#                    payment_date:
+#                        label: 'تاریخ پرداخت'
+#                        span: auto
+#                        mode: datetime
+#                        type: datepicker
         packages:
-            label: 'بسته های پستی'
-            prompt: 'افزودن بسته جدید'
-            span: full
-            type: repeater
-            tab: مرسوله
-            form:
-                fields:
-                    receiver_postal_code:
-                        label: 'کد پستی مقصد'
-                        span: auto
-                        type: text
-                    receiver_address:
-                        label: 'آدرس مقصد'
-                        span: auto
-                        type: text
-                    weight_id:
-                        label: وزن
-                        span: auto
-                        type: dropdown
-                    post_type_id:
-                        label: 'نحوه ارسال'
-                        span: auto
-                        type: dropdown
-                    distribution_time_id:
-                        label: 'بازه تحویل بسته پستی'
-                        span: auto
-                        type: dropdown
-                    special_services_id:
-                        label: 'خدمات ویژه'
-                        span: auto
-                        type: dropdown
-                    price:
-                        label: 'هزینه خدمات'
-                        span: auto
-                        type: number
-                    package_type_id:
-                        label: 'نوع بسته'
-                        span: auto
-                        type: dropdown
-                    insurance_type_id:
-                        label: 'نوع بیمه'
-                        span: auto
-                        type: dropdown
-                    points:
-                        label: 'نقاط GPS'
-                        span: auto
-                        disabled: 1
-                        context:
-                            - preview
-                        type: text
-                    transaction_code:
-                        label: 'کد پیگیری'
-                        span: auto
-                        type: text
-                    package_number:
-                        label: 'تعداد بسته'
-                        span: auto
-                        type: number
-                    is_rejected:
-                        label: 'قبول شده'
-                        span: auto
-                        default: 0
-                        type: switch
-        postmans:
-            label: پستچی
-            prompt: 'Add new item'
-            span: full
-            type: repeater
-            tab: پستچی
-            form:
-                fields:
-                    postman_id:
-                        label: پستچی
-                        span: auto
-                        type: dropdown
-                    acceptance_id:
-                        label: 'وضعیت پذیرش'
-                        span: auto
-                        type: dropdown
-                    accepted_at:
-                        label: 'تاریخ پذیرش یا رد'
-                        mode: datetime
-                        span: auto
-                        type: datepicker
-                    receive_at:
-                        label: 'تاریخ دریافت'
-                        mode: datetime
-                        span: auto
-                        type: datepicker
-        payments:
-            label: 'پرداخت هزینه سرویس'
-            prompt: 'Add new item'
-            span: full
-            type: repeater
-            tab: پرداخت
-            form:
-                fields:
-                    payment_type_id:
-                        label: 'نوع پرداخت'
-                        span: auto
-                        type: dropdown
-                    amount:
-                        label: 'مبلغ پرداختی'
-                        span: auto
-                        type: number
-                    payment_date:
-                        label: 'تاریخ پرداخت'
-                        span: auto
-                        mode: datetime
-                        type: datepicker
-        servicePackages:
             type: servicePackages
             tab: 'بسته های پستی'
             span: full
-        postman:
+        postmans:
             type: postman
             tab: 'ارجاع به پستچی'
             span: full
-        payment:
+        payments:
             type: payment
             tab: 'لیست پرداخت'
             span: full

@@ -22,10 +22,10 @@
                 <td>{{ cnt }}</td>
                 <td>{{ item.receiver_postal_code }}</td>
                 <td>{{ item.receiver_address }}</td>
-                <td>{{ service.getPostType(item.post_type_id) }}</td>
-                <td>{{ service.getPackageType(item.package_type_id) }}</td>
+                <td>{{ service.getType('post_type',item.post_type_id) }}</td>
+                <td>{{ service.getType('package_type',item.package_type_id) }}</td>
                 <td>{{ item.package_number }}</td>
-                <td>{{ service.getWeight(item.weight_id) }}</td>
+                <td>{{ service.getType('weight',item.weight_id) }}</td>
                 <td>{{ item.price }}</td>
                 <td>
                     <a

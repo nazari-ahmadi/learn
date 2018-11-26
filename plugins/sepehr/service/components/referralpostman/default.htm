@@ -30,7 +30,7 @@
                 <td>{{ cnt }}</td>
                 <td>{{ item.sender_postal_code }}</td>
                 <td>{{ item.sender_address }}</td>
-                <td>{{ item.status_id!='' ? service.getStatus(item.status_id) : '' }}</td>
+                <td>{{ item.status_id!='' ? service.getType('status',item.status_id) : '' }}</td>
                 <td>{{ item.created_at }}</td>
                 <td>
                     <a href="{{ url('serviceupdate') ~ '/' ~ item.id }}"

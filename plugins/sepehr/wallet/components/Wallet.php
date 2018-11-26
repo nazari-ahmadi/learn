@@ -4,6 +4,7 @@ use Cms\Classes\ComponentBase;
 use Exception;
 use Flash;
 use Redirect;
+use Sepehr\Service\Controllers\Services;
 use Sepehr\Service\Models\Service;
 use RainLab\User\Models\User;
 use Gateway;
@@ -29,7 +30,7 @@ class Wallet extends ComponentBase
         $this->page['wallet'] = $wallet;
         $serviceLists=Service::whereUserId($user->id)->whereStatusId(4)->where('payment_status','=','0')->get();
         $this->page['lists'] =$serviceLists ;
-        $this->page['service']=new Service();
+        $this->page['service']=new Services();
         $this->page['Wallet']=new Wallet();
     }
     public function onRun()

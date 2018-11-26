@@ -1,6 +1,7 @@
 <?php namespace Sepehr\Service\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
+use Sepehr\Service\Controllers\Services;
 use Sepehr\Service\Models\Service;
 
 
@@ -40,7 +41,7 @@ class Postman extends FormWidgetBase
         $this->vars['value'] = $this->getLoadValue();
         $this->vars['model'] = $this->model;
         $this->vars['postmen'] = $this->getPostman();
-        $this->vars['service'] = new Service();
+        $this->vars['service'] = new Services();
 
     }
 
@@ -63,7 +64,7 @@ class Postman extends FormWidgetBase
             $postmans[]=['postman_id'=> $id,'acceptance_id' => 1];
             $this->model->postmans= $postmans;
             $this->model->save();
-            $this->vars['service'] = new Service();
+            $this->vars['service'] = new Services();
             $this->vars['model']=$this->model;
         }
     }

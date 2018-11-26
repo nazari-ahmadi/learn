@@ -26,9 +26,9 @@
             <td width="5%"> <?= $count ?></td>
             <td><?= $package['receiver_postal_code'] ?></td>
             <td><?= $package['receiver_address'] ?></td>
-            <td><?= $service->getPostType($package['post_type_id']) ?></td>
-            <td><?= $service->getPackageType($package['package_type_id']) ?></td>
-            <td><?= $service->getInsuranceType($package['insurance_type_id']) ?></td>
+            <td><?= $service->getType('post_type',$package['post_type_id']) ?></td>
+            <td><?= $service->getType('package_type',$package['package_type_id']) ?></td>
+            <td><?= $service->getType('insurance_type',$package['insurance_type_id']) ?></td>
             <td>
                 <a
                         href="#"

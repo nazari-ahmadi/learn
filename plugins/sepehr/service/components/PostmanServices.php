@@ -2,6 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 use Auth;
+use Sepehr\Service\Controllers\Services;
 use Sepehr\Service\Models\Service;
 
 class PostmanServices extends ComponentBase
@@ -38,7 +39,7 @@ class PostmanServices extends ComponentBase
             }
         }
         $this->page['lists'] = $list;
-        $this->page['service'] = new Service();
+        $this->page['service'] = new Services();
     }
 
     public function onRun()

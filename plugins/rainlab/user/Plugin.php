@@ -97,6 +97,10 @@ class Plugin extends PluginBase
                 'tab'   => 'rainlab.user::lang.plugin.tab',
                 'label' => 'rainlab.user::lang.plugin.impersonate_user'
             ],
+            'rainlab.users.main.access_reports' => [
+                'tab'   => 'rainlab.user::lang.plugin.tab',
+                'label' => 'مدیریت گزارشات'
+            ],
         ];
     }
 
@@ -122,7 +126,13 @@ class Plugin extends PluginBase
                         'url'         => Backend::url('rainlab/user/usergroups'),
                         'icon'        => 'icon-users',
                         'permissions' => ['rainlab.users.main.access_groups'],
-                    ]                    
+                    ],
+                    'reports' => [
+                        'label'       => 'گزارشات کاربران',
+                        'url'         => Backend::url('rainlab/user/reports'),
+                        'icon'        => 'icon-search',
+                        'permissions' => ['rainlab.users.main.access_reports'],
+                    ]
                 ]
             ]
         ];

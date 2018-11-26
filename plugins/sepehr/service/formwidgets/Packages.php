@@ -7,9 +7,8 @@ use Sepehr\Details\Models\PackageType;
 use Sepehr\Details\Models\PostType;
 use Sepehr\Details\Models\SpecialService;
 use Sepehr\Details\Models\Weight;
-use Sepehr\Service\Models\Service;
-use ValidationException;
-
+use Sepehr\Service\Components\RequestService;
+use Sepehr\Service\Controllers\Services;
 
 /**
  * Packages Form Widget
@@ -43,7 +42,7 @@ class Packages extends FormWidgetBase
      */
     public function prepareVars()
     {
-        $this->vars['service'] = new Service();
+        $this->vars['service'] = new Services();
         $this->vars['packages'] = $this->model->packages;
         $this->vars['name'] = $this->formField->getName();
         $this->vars['value'] = $this->getLoadValue();
@@ -76,7 +75,7 @@ class Packages extends FormWidgetBase
     public function onCreatePackage()
     {
         $id = post('package_id');
-        $packages = $this->model->packages;
+        $packages[] = $this->model->packages;
         if ($id!=null){
             $packages[$id]["package_number"]       = post('package_number');
             $packages[$id]["receiver_postal_code"] = post('receiver_postal_code');
@@ -88,6 +87,7 @@ class Packages extends FormWidgetBase
             $packages[$id]['distribution_time_id'] = post('distribution_time_id');
             $packages[$id]['special_services_id']  = post('special_services_id');
         }else{
+            $services=new RequestService();
             $packages[] = [
                 'is_rejected' => false,
                 'package_number' => post('package_number'),
@@ -97,7 +97,7 @@ class Packages extends FormWidgetBase
                 'distribution_time_id' => post('distribution_time_id'),
                 'weight_id' => post('weight_id'),
                 'special_services_id' => post('special_services_id'),
-                'price' => 0,
+                'price' => $services->calculatePrice(),
                 'package_type_id' => post('package_type_id'),
                 'insurance_type_id' => post('insurance_type_id'),
                 'transaction_code' => post('transaction_code'),
@@ -106,8 +106,8 @@ class Packages extends FormWidgetBase
             ];
         }
         $this->model->packages = $packages;
-        $this->model->save();
-        $this->vars['service'] = new Service();
+        $this->model->forceSave();
+        $this->vars['service'] = new Services();
         $this->vars['model'] = $this->model;
 
     }
@@ -122,8 +122,8 @@ class Packages extends FormWidgetBase
 
         }
         $this->model->packages = $packages;
-        $this->model->save();
-        $this->vars['service'] = new Service();
+        $this->model->forceSave();
+        $this->vars['service'] = new Services();
         $this->vars['model']=$this->model;
     }
 

@@ -1,0 +1,164 @@
+<form class="layout-row">
+    <div class="padded-container layout">
+        <div class="layout-row min-size">
+            <div data-control="formwidget" data-refresh-handler="form::onRefresh" class="layout-row" role="form"
+                 id="Form-outsideContainer" data-disposable="">
+
+                <!-- Outside Tabs -->
+                <div class="layout-row min-size">
+
+                    <div id="Form-outsideTabs" class="form-tabless-fields ">
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="layout-row">
+            <div data-control="formwidget" data-refresh-handler="form::onRefresh" class="layout-row" role="form"
+                 id="Form-primaryContainer" data-disposable="">
+
+
+                <!-- Primary Tabs -->
+                <div class="layout-row min-size">
+
+                    <div id="Form-primaryTabs" class="control-tabs primary-tabs layout has-tabs" data-control="tab"
+                         data-slidable="">
+                        <div class="">
+                            <ul class="nav nav-tabs" data-disposable="">
+                                <li class="active"><a href="#primarytab-1" data-target="#tabs19407-tab-01542721093382"
+                                                      data-toggle="tab" title="اطلاعات عمومی"><span class="title"><span>اطلاعات عمومی</span></span></a><span
+                                            class="tab-close"><i>×</i></span></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="tab-content ">
+                            <div class="tab-pane  active " id="tabs19407-tab-01542721093382">
+                                <div class="form-group  text-field span-left   " data-field-name="first_name"
+                                     id="first_name-group"><label for="first_name">
+                                        نام </label>
+
+
+                                    <!-- Text -->
+                                    <input type="text" name="first_name" id="first_name" value=""
+                                           placeholder="" class="form-control" autocomplete="off" maxlength="255"></div>
+                                <div class="form-group  text-field span-right   " data-field-name="last_name"
+                                     id="last_name-group"><label for="last_name">
+                                        نام خانوادگی </label>
+
+
+                                    <!-- Text -->
+                                    <input type="text" name="last_name" id="last_name" value=""
+                                           placeholder="" class="form-control" autocomplete="off" maxlength="255"></div>
+                                <div class="form-group  text-field span-right   " data-field-name="mobile"
+                                     id="mobile-group"><label for="mobile">
+                                        موبایل </label>
+
+
+                                    <!-- Text -->
+                                    <input type="text" name="mobile" id="mobile" value=""
+                                           placeholder="" class="form-control" autocomplete="off" maxlength="255"></div>
+                                <div class="form-group  text-field span-left   " data-field-name="national_code"
+                                     id="national_code-group"><label
+                                            for="national_code">
+                                        کد ملی </label>
+
+
+                                    <!-- Text -->
+                                    <input type="text" name="national_code" id="national_code"
+                                           value="" placeholder="" class="form-control" autocomplete="off"
+                                           maxlength="255"></div>
+                                <div class="form-group  dropdown-field span-right   " data-field-name="sex_id"
+                                     id="sex_id-group">
+                                    <label for="sex_id">جنسیت </label>
+
+
+                                    <!-- Dropdown -->
+                                    <select id="sex_id"
+                                            class="form-control tagit-select custom-select  select2-hidden-accessible"
+                                            data-disposable="data-disposable" tabindex="-1" aria-hidden="true">
+                                        <option value="">انتخاب کنید</option>
+                                        <option value="1">مرد</option>
+                                        <option value="2">زن</option>
+
+                                    </select>
+                                    <span class="select2 select2-container select2-container--default select2-container--below"
+                                            dir="ltr"><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                </div>
+                                <div class="form-group  widget-field text-left span-left" style="padding-bottom: 0;">
+                                    <label>جنسیت های انتخاب شده</label>
+                                    <ul class="ul-tags" style="height: 38px;"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="form-buttons">
+            <div class="loading-indicator-container">
+                <button type="submit" data-request="onReports" data-hotkey="ctrl+p, cmd+s"
+                        data-load-indicator="در حال ایجاد گزارش..." class="btn btn-primary" data-disposable=""
+                data-request-update="'result':'.showResult'">
+                    گزارشگیری
+                </button>
+
+            </div>
+        </div>
+    </div>
+</form>
+    <div class="row">
+        <div class="col-lg-12">
+                <div class="showResult">
+
+                </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".ul-tags").tagit();
+        $(".tagit-new").remove();
+
+        $(".tagit-select").change(function(){
+            fieldID = $(this).attr("id");
+            tagID = $(this).val();
+            tagName = $("option:selected", this).html();
+
+            count = tagName.length;
+            name = '';
+            for(i=0;i<count;i++)
+            {
+                if(tagName[i] == ' ' && tagName[i+1] == '-')
+                {
+                    break;
+                }
+                else
+                {
+                    name += tagName[i];
+                }
+            }
+
+            if(tagID >= 0)
+            {
+                $(this).parent().next().find(".ul-tags").prepend('<li class="tagit-choice ui-widget-content ui-state-default ui-corner-all tagit-choice-editable"><span class="tagit-label">'+tagName+'</span><a class="tagit-close"><span class="text-icon">×</span><span class="ui-icon ui-icon-close"></span></a><input type="hidden" '+
+                    'value="'+tagID+'" name="'+fieldID+'[]" class="tagit-hidden-field"></li>');
+
+                $(".tagit-close").click(function(){
+                    tagID = $(this).next().val();
+                    tagName = $(this).prev().text();
+                    $(this).parent().parent().parent().prev().find(".tagit-select").append("<option value='"+tagID+"'>"+tagName+"</option>");
+                    $(this).parent().remove();
+                });
+                $("#select2-"+fieldID+"-container").html("انتخاب کنید");
+                $("option:selected", this).remove();
+            }
+        });
+    });
+</script>

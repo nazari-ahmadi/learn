@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Report
+
+# Model Form Field configuration
+form: $/rainlab/user/models/report/fields.yaml
+
+# Model Class name
+modelClass: Rainlab\User\Models\Report
+
+# Default redirect location
+defaultRedirect: rainlab/user/reports
+
+# Create page
+create:
+    title: Create Report
+    redirect: rainlab/user/reports/update/:id
+    redirectClose: rainlab/user/reports
+
+# Update page
+update:
+    title: Edit Report
+    redirect: rainlab/user/reports
+    redirectClose: rainlab/user/reports
+
+# Preview page
+preview:
+    title: Preview Report

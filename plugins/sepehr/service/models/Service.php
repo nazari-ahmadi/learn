@@ -29,14 +29,10 @@ class Service extends Model
      */
     public $rules = [
         'user_id' => 'required',
-//    'payment_type_id' => 'required',
-//    'operator_id' => 'required',
         'packages' => 'required',
     ];
     public $customMessages = [
         'user_id.required' => 'لطفا کاربر را انتخاب نمایید',
-//    'payment_type_id.required' => 'لطفا نوع پرداخت را انتخاب نمایید',
-//    'operator_id.required' => 'لطفا اپراتور را انتخاب نمایید',
         'packages.required' => 'لطفا بسته های پستی خود را انتخاب نمایید'
     ];
 
@@ -62,53 +58,6 @@ class Service extends Model
         }
     }
 
-    public function getPostType($id)
-    {
-        return PostType::find($id)->name;
-    }
-
-    public function getPackageType($id)
-    {
-        return PackageType::find($id)->name;
-    }
-
-    public function getInsuranceType($id)
-    {
-        return InsuranceType::find($id)->name;
-    }
-
-    public function getPaymentType($id)
-    {
-        return PaymentType::find($id)->name;
-    }
-
-    public function getSpecialService($id)
-    {
-        if ($id != 0) {
-            return SpecialService::find($id)->name;
-        } else {
-            return 'انتخاب کنید';
-        }
-    }
-
-    public function getWeight($id)
-    {
-        if ($id != 0) {
-            return Weight::find($id)->name;
-        } else {
-            return 'انتخاب کنید';
-        }
-    }
-
-    public function getDistributionTime($id)
-    {
-        if ($id != 0) {
-            return DistributionTime::find($id)->name;
-        } else {
-            return 'انتخاب کنید';
-        }
-    }
-
     public function getUserIdOptions()
     {
         $users = FrontUser::whereIsActivated(1)
@@ -125,12 +74,6 @@ class Service extends Model
         return $list;
     }
 
-    /*public function getManagerIdOptions()
-    {
-        $lists = BackendUser::lists('first_name', 'id');
-        $list = [' ' => 'انتخاب کنید'] + $lists;
-        return $list;
-    }*/
     public function getOperatorIdOptions()
     {
         $lists = BackendUser::lists('first_name', 'id');
@@ -216,27 +159,6 @@ class Service extends Model
      * @var string The database table used by the model.
      */
     public $table = 'sepehr_service_index';
-
-    public function getStatus($id)
-    {
-        return Status::find($id)->name;
-    }
-
-    public function getAcceptance($id)
-    {
-        return Acceptance::find($id)->name;
-    }
-
-    public function getUserPostMans($postmanId)
-    {
-        $user = FrontUser::whereId($postmanId)->get()->first();
-        return ($user->first_name . ' ' . $user->last_name);
-    }
-
-    public function idConstructor()
-    {
-
-    }
 
     public $belongsTo = [
         'user' => 'RainLab\User\Models\User',

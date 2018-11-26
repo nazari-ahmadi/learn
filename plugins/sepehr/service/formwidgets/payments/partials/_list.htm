@@ -22,7 +22,7 @@
     <?php foreach ($model->payments as $key => $payment): ?>
         <tr>
             <td width="5%"> <?= $count ?></td>
-            <td><?= $service->getPaymentType($payment['payment_type_id']) ?></td>
+            <td><?= $service->getType('payment_type',$payment['payment_type_id']) ?></td>
             <td><?= $payment['amount'] ?></td>
             <td><?= $payment['payment_date'] ?></td>
             <td>

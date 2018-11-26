@@ -1,0 +1,63 @@
+<style type="text/css">
+	table.dataTable thead .list-checkbox.sorting:before, table.dataTable thead .list-checkbox.sorting_desc:before, table.dataTable thead .list-checkbox.sorting_asc:before{
+		content: "" !important;
+	}
+
+	.list-scrollable-container.scroll-after:after {
+	    display: none;
+	}
+</style>
+
+<link rel="stylesheet" href="<?= URL::asset('plugins/sepehr/service/assets/css/dataTables.min.css') ?>">
+<script src="<?= URL::asset('plugins/sepehr/service/assets/js/jquery.dataTables.min.js') ?>"></script>
+<script src="<?= URL::asset('plugins/sepehr/service/assets/js/plugins.js') ?>"></script>
+
+<form class="layout-row">
+	<div data-control="formwidget" data-refresh-handler="form::onRefresh" class="layout-row" role="form" id="Form-primaryContainer" data-disposable="">
+		<div class="list-widget list-scrollable-container" id="Lists">
+		    <div class="control-list list-scrollable pagination2" data-control="listwidget">
+			    <table class="table data dataTable" id="tableResult" data-control="rowlink">
+			        <thead>
+			            <tr>
+			            	<th class="list-checkbox">
+					            <div class="checkbox custom-checkbox nolabel">
+					                <input type="checkbox" id="Lists-checkboxAll" class="Lists-checkboxAll">
+					                <label for="Lists-checkboxAll"></label>
+					            </div>
+					        </th>		            	
+				            <th class="list-cell-name-id list-cell-type-text" style="border-left: 1px solid #eeeeee;">
+					            <a>#</a>
+				        	</th>  
+			                <th class="list-cell-name-id list-cell-type-text">
+				                <a>نام</a>
+			            	</th>			        	
+			                <th class="list-cell-name-id list-cell-type-text">
+				                <a>نام خانوادگی</a>
+			            	</th>
+			    		</tr>
+			        </thead>
+			        <tbody>
+			        <?php $cnt = 1;?>
+			        <?php foreach($users as $item):?>
+			        	<tr class="rowlink">
+		                    <td class="list-checkbox nolink">
+		                        <div class="checkbox custom-checkbox nolabel">
+		                            <input type="checkbox" name="checked[]" id="Lists-checkbox-<?=$item->id?>" value="<?=$item->id?>">
+		                            <label for="Lists-checkbox-<?=$item->id?>">بررسی</label>
+		                        </div>
+		                    </td>
+			        		<td class="nolink"><?=$cnt++?></td>
+			        		<td>
+			        			<a href="<?=Backend::url('ls/details/courses/update/'.$item->id)?>" style="display: none;">
+			        				<?=$item->first_name?>
+			        			</a>
+			        		</td>
+			        		<td><?=$item->last_name?></td>
+			        	</tr>
+			        <?php endforeach;?>
+			        </tbody>
+			    </table>
+		    </div>
+		</div>
+	</div>
+</form>

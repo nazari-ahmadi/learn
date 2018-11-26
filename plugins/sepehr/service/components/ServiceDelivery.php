@@ -12,6 +12,7 @@ use Sepehr\Details\Models\PostType;
 use Sepehr\Details\Models\SpecialService;
 use Sepehr\Details\Models\Status;
 use Sepehr\Details\Models\Weight;
+use Sepehr\Service\Controllers\Services;
 use Sepehr\Service\Models\Service;
 use Session;
 use Auth;
@@ -55,7 +56,7 @@ class ServiceDelivery extends ComponentBase
         Session::put('packages', $list->packages);
         $this->page['price'] = $this->calculatePrice($list->packages);
         $this->page['packages'] = $list->packages;
-        $this->page['service'] = new Service();
+        $this->page['service'] = new Services();
         $this->page['paymentTypes'] = PaymentType::orderBy('name')->get();
         $this->page['postTypes'] = PostType::orderbY('name')->get();
         $this->page['insurancesTypes'] = InsuranceType::orderBy('name')->get();
@@ -94,7 +95,7 @@ class ServiceDelivery extends ComponentBase
         //در صورتی که کامل پرداخت شده وضعیت پرداخت تنظیم شود
 
         $service->forceSave();
-        $this->page['service']=new Service();
+        $this->page['service']=new Services();
         $this->page['payments']=$service->payments;
 
     }
@@ -106,7 +107,7 @@ class ServiceDelivery extends ComponentBase
         Session::put('packages', $packages);
         $this->page['packages'] = $packages;
         $this->page['price'] = $this->calculatePrice($packages);
-        $this->page['service'] = new Service();
+        $this->page['service'] = new Services();
     }
 
     public function onDeliveredService()

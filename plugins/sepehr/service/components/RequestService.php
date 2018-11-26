@@ -13,6 +13,7 @@ use Sepehr\Details\Models\PostType;
 use Sepehr\Details\Models\SpecialService;
 use Sepehr\Details\Models\Status;
 use Sepehr\Details\Models\Weight;
+use Sepehr\Service\Controllers\Services;
 use Sepehr\Service\Models\Service;
 use RainLab\User\Models\User as FrontendUser;
 use Backend\Models\User as BackendUser;
@@ -48,14 +49,12 @@ class RequestService extends ComponentBase
 
     public function preVars()
     {
-
         $this->page['id'] = $this->property('id');
         $user = Auth::getUser();
         Session::forget('packages');
         $id = $this->property('id');
         if ($id != null) {
             $service = Service::whereUserId($user->id)->find($id);
-//
             Session::put('packages', $service->packages);
             $this->page['packages'] = $service->packages;
         } else {
@@ -77,7 +76,7 @@ class RequestService extends ComponentBase
         $this->page['statuses'] = Status::orderBy('id')->get();
         $this->page['weight'] = Weight::orderBy('id')->get();
         $this->page['lists'] = $service;
-        $this->page['service'] = new Service();
+        $this->page['service'] = new Services();
     }
 
     public function onRun()
@@ -87,35 +86,7 @@ class RequestService extends ComponentBase
 
 
     public function onCreatePackage()
-
     {
-        if (!post('package_number')) {
-            throw new ValidationException(['package_number' => 'لطفاتعداد بسته را وارد کنید.']);
-        }
-        if (!post('receiver_postal_code')) {
-            throw new ValidationException(['receiver_postal_code' => 'لطفا کد پستی گیرنده کنید.']);
-        }
-
-        if (!post('receiver_address')) {
-            throw new ValidationException(['receiver_address' => 'لطفا آدرس گیرنده را وارد کنید.']);
-        }
-
-        if (!$weight = post('weight_id')) {
-            throw new ValidationException(['weight_id' => 'لطفا وزن مرسوله  را وارد کنید.']);
-        }
-
-        if (!trim(post('post_type_id'))) {
-            throw new ValidationException(['post_type_id' => 'لطفا نوع ارسال را انتخاب کنید.']);
-        }
-
-        if (!trim(post('package_type_id'))) {
-            throw new ValidationException(['package_type_id' => 'لطفا نوع بسته را انتخاب کنید.']);
-        }
-
-        if (!trim(post('insurance_type_id'))) {
-            throw new ValidationException(['insurance_type_id' => 'لطفا نوع بیمه را انتخاب کنید.']);
-        }
-
         $packages = Session::get("packages");
 
         if ($id = post('package_id')){
@@ -145,22 +116,26 @@ class RequestService extends ComponentBase
                 'points' => post('points'),
                 'price' => $this->calculatePrice(),
             ];
-
+            $services=new Services();
+            $id=-1;
+            foreach ($packages as $package){
+                $id++;
+            }
+            $services->beforeCreatePackage($packages,$id);
         }
 
-//        throw new \ApplicationException(print_r($packages));
         Session::put("packages", $packages);
 
         $this->page['packages'] = Session::get('packages');
 
-        $this->page['service'] = new Service;
+        $this->page['service'] = new Services();
     }
 
     /**
      * @throws ValidationException
      */
 
-    private function calculatePrice(){
+    public function calculatePrice(){
         return 1000;
     }
     public function onPackageDelete()
@@ -174,23 +149,13 @@ class RequestService extends ComponentBase
 
         Session::put('packages', $packages);
         $this->page['packages'] = $packages;
-        $this->page['service'] = new Service();
+        $this->page['service'] = new Services();
     }
 
     public function onSaveService()
     {
-        if (!post('sender_postal_code')) {
-            throw new ValidationException(['sender_postal_code' => 'لطفا کد پستی خود را وارد کنید.']);
-        }
-
-        if (!post('sender_address')) {
-            throw new ValidationException(['sender_address' => 'لطفا آدرس فرستنده را وارد کنید.']);
-        }
-
-        if (!Session::get('packages')) {
-            throw new ValidationException(['' => 'لطفا بسته های مورد نظر خود را وارد کنید.']);
-        }
         $user = Auth::getUser();
+        $serviceCheck=new Services();
         $id = $this->property('id');
         if ($id != null) {
             $service = Service::whereUserId($user->id)->find($id);
@@ -205,6 +170,9 @@ class RequestService extends ComponentBase
         $service->user_id = $user->id;
 
         $service->packages = Session::get('packages');
+
+        $serviceCheck->beforeSaveService($service);
+
         $service->save();
 
         Flash::success('سرویس با موفقیت ذخیره گردید');

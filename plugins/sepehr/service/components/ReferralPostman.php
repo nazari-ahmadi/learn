@@ -2,6 +2,7 @@
 
 use Auth;
 use Carbon\Carbon;
+use Sepehr\Service\Controllers\Services;
 use Session;
 use Cms\Classes\ComponentBase;
 use Sepehr\Service\Models\Service;
@@ -42,7 +43,7 @@ class ReferralPostman extends ComponentBase
             }
         }
         $this->page['lists'] = $list;
-        $this->page['service'] = new Service();
+        $this->page['service'] = new Services();
     }
 
     public function onRun()

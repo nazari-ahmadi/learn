@@ -2,6 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 use Redirect;
+use Sepehr\Service\Controllers\Services;
 use Sepehr\Service\Models\Service;
 use Auth;
 
@@ -24,7 +25,7 @@ class ServiceList extends ComponentBase
     {
         $user = Auth::getUser();
         $this->page['lists'] = Service::whereUserId($user->id)->orderBy('id', 'desc')->get();
-        $this->page['service'] = new Service();
+        $this->page['service'] = new Services();
         $this->page['servicelist'] = new ServiceList();
     }
 
