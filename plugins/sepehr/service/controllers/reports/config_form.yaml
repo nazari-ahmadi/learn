@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Report
+
+# Model Form Field configuration
+form: $/sepehr/service/models/report/fields.yaml
+
+# Model Class name
+modelClass: Sepehr\Service\Models\Report
+
+# Default redirect location
+defaultRedirect: sepehr/service/reports
+
+# Create page
+create:
+    title: Create Report
+    redirect: sepehr/service/reports/update/:id
+    redirectClose: sepehr/service/reports
+
+# Update page
+update:
+    title: Edit Report
+    redirect: sepehr/service/reports
+    redirectClose: sepehr/service/reports
+
+# Preview page
+preview:
+    title: Preview Report

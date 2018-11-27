@@ -1,0 +1,235 @@
+<style type="text/css">
+    table.dataTable thead .list-checkbox.sorting:before, table.dataTable thead .list-checkbox.sorting_desc:before, table.dataTable thead .list-checkbox.sorting_asc:before {
+        content: "" !important;
+    }
+
+    .list-scrollable-container.scroll-after:after {
+        display: none;
+    }
+</style>
+
+<link rel="stylesheet" href="<?= URL::asset('plugins/sepehr/service/assets/css/dataTables.min.css') ?>">
+<script src="<?= URL::asset('plugins/sepehr/service/assets/js/jquery.dataTables.min.js') ?>"></script>
+<script src="<?= URL::asset('plugins/sepehr/service/assets/js/plugins.js') ?>"></script>
+
+<form class="layout-row">
+
+    <div id="Form-primaryTabs" class="control-tabs primary-tabs layout scroll-after has-tabs"
+         data-control="tab" data-slidable="">
+        <div>
+            <ul class="nav nav-tabs" data-disposable="">
+                <li class="active">
+                    <a href="#primarytab-1" data-target="#tabs-1" data-toggle="tab" title="اطلاعات عمومی">
+                        <span class="title">
+                            <span>اطلاعات سرویس</span>
+                        </span>
+                    </a>
+                    <span class="tab-close"><i>×</i></span>
+                </li>
+                <li>
+                    <a href="#primarytab-1" data-target="#tabs-2" data-toggle="tab" title="اطلاعات عمومی">
+                        <span class="title">
+                            <span>اطلاعات بسته </span>
+                        </span>
+                    </a>
+                    <span class="tab-close"><i>×</i></span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content ">
+
+            <!--            اطلاعات سرویس -->
+            <div class="tab-pane active" id="tabs-1" style="margin: -27px -20px 0 -20px">
+                <div data-control="formwidget" data-refresh-handler="form::onRefresh" class="layout-row" role="form"
+                     id="Form-primaryContainer1" data-disposable="">
+                    <div class="list-widget list-scrollable-container" id="Lists">
+                        <div class="control-list list-scrollable pagination2" data-control="listwidget">
+                            <table class="table data dataTable" id="tableResult1" data-control="rowlink">
+                                <thead>
+                                <tr>
+                                    <th class="list-checkbox">
+                                        <div class="checkbox custom-checkbox nolabel">
+                                            <input type="checkbox" id="Lists-checkboxAll" class="Lists-checkboxAll">
+                                            <label for="Lists-checkboxAll"></label>
+                                        </div>
+                                    </th>
+                                    <th class="list-cell-name-id list-cell-type-text"
+                                        style="border-left: 1px solid #eeeeee;">
+                                        <a>#</a>
+                                    </th>
+                                    <th class="list-cell-name-id list-cell-type-text">
+                                        <a> نام و نام خانوادگی </a>
+                                    </th>
+                                    <th class="list-cell-name-id list-cell-type-text">
+                                        <a>کدپستی فرستنده </a>
+                                    </th>
+                                    <th class="list-cell-name-id list-cell-type-text">
+                                        <a>آدرس فرستنده</a>
+                                    </th>
+                                    <th class="list-cell-name-id list-cell-type-text">
+                                        <a>وضعیت سرویس </a>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php $cnt = 1; ?>
+                                <?php foreach ($services as $item): ?>
+                                    <tr class="rowlink">
+                                        <td class="list-checkbox nolink">
+                                            <div class="checkbox custom-checkbox nolabel">
+                                                <input type="checkbox" name="checked[]"
+                                                       id="Lists-checkbox-<?= $item->id ?>"
+                                                       value="<?= $item->id ?>">
+                                                <label for="Lists-checkbox-<?= $item->id ?>">بررسی</label>
+                                            </div>
+                                        </td>
+                                        <td class="nolink"><?= $cnt++ ?></td>
+                                        <td>
+                                            <a href="<?= Backend::url('ls/details/courses/update/' . $item->id) ?>"
+                                               style="display: none;">
+                                                <?= $item->user->first_name . ' ' . $item->user->last_name ?>
+                                            </a>
+                                        </td>
+                                        <td><?= $item->sender_postal_code ?></td>
+                                        <td><?= $item->sender_address ?></td>
+                                        <td><?= $item->status->name ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--            اطلاعات سرویس -->
+
+
+            <!--            اطلاعات بسته -->
+            <div class="tab-pane " id="tabs-2" style="margin: -27px -20px 0 -20px">
+                <div data-control="formwidget" data-refresh-handler="form::onRefresh" class="layout-row" role="form"
+                     id="Form-primaryContainer2" data-disposable="">
+                    <div class="list-widget list-scrollable-container" id="Lists">
+                        <div class="control-list list-scrollable pagination2" data-control="listwidget">
+                            <table class="table data dataTable" id="tableResult2" data-control="rowlink">
+                                <thead>
+                                <tr>
+                                    <th class="list-checkbox">
+                                        <div class="checkbox custom-checkbox nolabel">
+                                            <input type="checkbox" id="Lists-checkboxAll" class="Lists-checkboxAll">
+                                            <label for="Lists-checkboxAll"></label>
+                                        </div>
+                                    </th>
+                                    <th class="list-cell-name-id list-cell-type-text"
+                                        style="border-left: 1px solid #eeeeee;">
+                                        <a>#</a>
+                                    </th>
+                                    <th class="list-cell-name-id list-cell-type-text">
+                                        <a> شماره سرویس </a>
+                                    </th>
+                                    <th class="list-cell-name-id list-cell-type-text">
+                                        <a> کد پستی گیرنده </a>
+                                    </th>
+
+                                    <th class="list-cell-name-id list-cell-type-text">
+                                        <a>آدرس گیرنده </a>
+                                    </th>
+                                    <th class="list-cell-name-id list-cell-type-text">
+                                        <a>نوع پست</a>
+                                    </th>
+                                    <th class="list-cell-name-id list-cell-type-text">
+                                        <a>وضعیت سرویس </a>
+                                    </th>
+                                    <th class="list-cell-name-id list-cell-type-text">
+                                        <a>قیمت  </a>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php $cnt = 1; ?>
+                                <?php foreach ($services as $item): ?>
+                                    <?php foreach ($item->packages as $key => $package): ?>
+                                        <tr class="rowlink">
+                                            <td class="list-checkbox nolink">
+                                                <div class="checkbox custom-checkbox nolabel">
+                                                    <input type="checkbox" name="checked[]"
+                                                           id="Lists-checkbox-<?= $key ?>"
+                                                           value="<?= $key ?>">
+                                                    <label for="Lists-checkbox-<?= $key ?>">بررسی</label>
+                                                </div>
+                                            </td>
+                                            <td class="nolink"><?= $cnt++ ?></td>
+                                            </td>
+                                            <td><?= $item->id ?></td>
+                                            <td>
+                                                <a href="<?= Backend::url('ls/details/courses/update/' . $item->id) ?>"
+                                                   style="display: none;">
+                                                    <?= $package['receiver_postal_code'] ?>
+                                                </a>
+                                            </td>
+                                            <td><?= $package['receiver_address'] ?></td>
+                                            <td><?= $service->getType('post_type',$package['post_type_id']) ?></td>
+                                            <td><?= $service->getType('package_type',$package['package_type_id']) ?></td>
+                                            <td><?= $package['price'] ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--            اطلاعات بسته -->
+
+
+            <div class="tab-pane " id="tabs-3">
+                sara
+            </div>
+            <div class="tab-pane " id="tabs-4">
+                sara
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+
+<!--<div id="Form-primaryTabs" class="control-tabs primary-tabs layout scroll-after has-tabs"
+     data-control="tab" data-slidable="">
+    <div>
+        <ul class="nav nav-tabs" data-disposable="">
+            <li class="active">
+                <a href="#primarytab-1" data-target="#tabs-1" data-toggle="tab"
+                   title="اطلاعات عمومی">
+                                            <span class="title">
+                                                <span>اطلاعات عمومی</span>
+                                            </span>
+                </a>
+                <span class="tab-close"><i>×</i></span>
+            </li>
+            <li>
+                <a href="#primarytab-1" data-target="#tabs-2" data-toggle="tab"
+                   title="اطلاعات عمومی">
+                                            <span class="title">
+                                                <span>اطلاعات عمومی</span>
+                                            </span>
+                </a>
+                <span class="tab-close"><i>×</i></span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-content ">
+        <div class="tab-pane active" id="tabs-1">
+            ehsan
+        </div>
+        <div class="tab-pane " id="tabs-2">
+            sara
+        </div>
+    </div>
+</div>-->
+
+
+
