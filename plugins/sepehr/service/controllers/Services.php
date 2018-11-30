@@ -1,6 +1,7 @@
 <?php namespace Sepehr\Service\Controllers;
 
 use Backend\Classes\Controller;
+use Backend\Models\User;
 use BackendMenu;
 use RainLab\User\Models\User as FrontUser;
 use ApplicationException;
@@ -65,6 +66,12 @@ class Services extends Controller
         }
     }
 
+
+  public function findPostman($id)
+  {
+    $user=\RainLab\User\Models\User::find($id);
+    return $user;
+  }
     public function beforeSaveService($service)
     {
         switch ($service){

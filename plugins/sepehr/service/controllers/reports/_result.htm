@@ -1,3 +1,9 @@
+
+
+
+
+
+
 <style type="text/css">
     table.dataTable thead .list-checkbox.sorting:before, table.dataTable thead .list-checkbox.sorting_desc:before, table.dataTable thead .list-checkbox.sorting_asc:before {
         content: "" !important;
@@ -6,6 +12,18 @@
     .list-scrollable-container.scroll-after:after {
         display: none;
     }
+    .list-group{
+      text-decoration: none;
+      list-style-type: none;
+    }
+    .list-group span{
+      display: table-cell;
+      padding: 5px;
+      border: 1px solid;
+
+      text-align: center;
+    }
+
 </style>
 
 <link rel="stylesheet" href="<?= URL::asset('plugins/sepehr/service/assets/css/dataTables.min.css') ?>">
@@ -70,6 +88,9 @@
                                     <th class="list-cell-name-id list-cell-type-text">
                                         <a>وضعیت سرویس </a>
                                     </th>
+                                  <th>
+                                    <a> عملیات</a>
+                                  </th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -86,15 +107,106 @@
                                         </td>
                                         <td class="nolink"><?= $cnt++ ?></td>
                                         <td>
-                                            <a href="<?= Backend::url('ls/details/courses/update/' . $item->id) ?>"
-                                               style="display: none;">
+                                            <span href="<?= Backend::url('ls/details/courses/update/' . $item->id) ?>"
+                                               >
                                                 <?= $item->user->first_name . ' ' . $item->user->last_name ?>
-                                            </a>
+                                            </span>
                                         </td>
                                         <td><?= $item->sender_postal_code ?></td>
                                         <td><?= $item->sender_address ?></td>
                                         <td><?= $item->status->name ?></td>
+                                      <td>
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#<?=$item->id?>">
+                                           بسته های پستی
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#<?=$item->id?><?=$item->id?>">
+                                           پستچی ها
+                                        </button>
+                                      </td>
                                     </tr>
+
+                                  <!-- packages modal-->
+                                  <div class="modal fade" id="<?=$item->id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content modal-lg">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                          <h4 class="modal-title right-alignht" id="myModalLabel"><span>بسته های پستی سرویس شماره : </span><?= $item->id?></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                          <ul class="list-group">
+                                            <li class="list-group-item">
+                                              <div class="row">
+                                                <span class="col-md-2">کد پستی </span>
+                                                <span class="col-md-4">آدرس </span>
+                                                <span class="col-md-2">نوع پست</span>
+                                                <span class="col-md-2">نوع بسته پستی</span>
+                                                <span class="col-md-2">قیمت</span>
+                                              </div>
+                                            </li>
+                                            <?php foreach ($item->packages as $key=>$package): ?>
+                                            <li class="list-group-item">
+                                              <div class="row">
+                                                <span class="col-md-2"><?= $package['receiver_postal_code']  ?></span>
+                                                <span class="col-md-4"><?= $package['receiver_address'] ?></span>
+                                                <span class="col-md-2"><?= $service->getType('post_type',$package['post_type_id']) ?> </span>
+                                                <span class="col-md-2"><?= $service->getType('package_type',$package['package_type_id']) ?></span>
+                                                <span class="col-md-2"><?= $package['price']?></span>
+                                              </div>
+                                            </li>
+                                            <?php endforeach; ?>
+
+                                          </ul>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- End packages modal-->
+
+                                  <!-- postmans modal-->
+                                  <div class="modal fade" id="<?=$item->id?><?=$item->id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content modal-lg">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                          <h4 class="modal-title right-alignht" id="myModalLabel"><span>پستچی های سرویس شماره : </span><?= $item->id?></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                          <ul class="list-group">
+                                            <li class="list-group-item">
+                                              <div class="row">
+                                                <span class="col-md-4">نام و نام خانوادگی  </span>
+                                                <span class="col-md-4"> وضعیت پذیرش</span>
+                                                <span class="col-md-4">تاریخ</span>
+                                              </div>
+                                            </li>
+                                            <?php if ($item->postmans!=null) :?>
+                                            <?php foreach ($item->postmans as $key=>$postman): ?>
+                                              <li class="list-group-item">
+                                                <div class="row">
+                                                  <span class="col-md-4"><?= $service->findPostman($postman['postman_id'])->first_name.' '.$service->findPostman($postman['postman_id'])->last_name?> </span>
+                                                  <span class="col-md-4"><?= $service->getType('acceptance',$postman['acceptance_id']) ?></span>
+                                                  <span class="col-md-4"><?= $postman['acceptance_date']?></span>
+
+                                                </div>
+                                              </li>
+                                            <?php endforeach; ?>
+                                            <?php endif;?>
+
+                                          </ul>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- End  postmans modal-->
                                 <?php endforeach; ?>
                                 </tbody>
                             </table>
@@ -106,7 +218,7 @@
 
 
             <!--            اطلاعات بسته -->
-            <div class="tab-pane " id="tabs-2" style="margin: -27px -20px 0 -20px">
+            <!--<div class="tab-pane " id="tabs-2" style="margin: -27px -20px 0 -20px">
                 <div data-control="formwidget" data-refresh-handler="form::onRefresh" class="layout-row" role="form"
                      id="Form-primaryContainer2" data-disposable="">
                     <div class="list-widget list-scrollable-container" id="Lists">
@@ -146,40 +258,40 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php $cnt = 1; ?>
-                                <?php foreach ($services as $item): ?>
-                                    <?php foreach ($item->packages as $key => $package): ?>
+                                <?php /*$cnt = 1; */?>
+                                <?php /*foreach ($services as $item): */?>
+                                    <?php /*foreach ($item->packages as $key => $package): */?>
                                         <tr class="rowlink">
                                             <td class="list-checkbox nolink">
                                                 <div class="checkbox custom-checkbox nolabel">
                                                     <input type="checkbox" name="checked[]"
-                                                           id="Lists-checkbox-<?= $key ?>"
-                                                           value="<?= $key ?>">
-                                                    <label for="Lists-checkbox-<?= $key ?>">بررسی</label>
+                                                           id="Lists-checkbox-<?/*= $key */?>"
+                                                           value="<?/*= $key */?>">
+                                                    <label for="Lists-checkbox-<?/*= $key */?>">بررسی</label>
                                                 </div>
                                             </td>
-                                            <td class="nolink"><?= $cnt++ ?></td>
+                                            <td class="nolink"><?/*= $cnt++ */?></td>
                                             </td>
-                                            <td><?= $item->id ?></td>
+                                            <td><?/*= $item->id */?></td>
                                             <td>
-                                                <a href="<?= Backend::url('ls/details/courses/update/' . $item->id) ?>"
+                                                <a href="<?/*= Backend::url('ls/details/courses/update/' . $item->id) */?>"
                                                    style="display: none;">
-                                                    <?= $package['receiver_postal_code'] ?>
+                                                    <?/*= $package['receiver_postal_code'] */?>
                                                 </a>
                                             </td>
-                                            <td><?= $package['receiver_address'] ?></td>
-                                            <td><?= $service->getType('post_type',$package['post_type_id']) ?></td>
-                                            <td><?= $service->getType('package_type',$package['package_type_id']) ?></td>
-                                            <td><?= $package['price'] ?></td>
+                                            <td><?/*= $package['receiver_address'] */?></td>
+                                            <td><?/*= $service->getType('post_type',$package['post_type_id']) */?></td>
+                                            <td><?/*= $service->getType('package_type',$package['package_type_id']) */?></td>
+                                            <td><?/*= $package['price'] */?></td>
                                         </tr>
-                                    <?php endforeach; ?>
-                                <?php endforeach; ?>
+                                    <?php /*endforeach; */?>
+                                <?php /*endforeach; */?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <!--            اطلاعات بسته -->
 
 
@@ -194,6 +306,12 @@
 
 
 </form>
+
+
+
+
+
+
 
 
 <!--<div id="Form-primaryTabs" class="control-tabs primary-tabs layout scroll-after has-tabs"

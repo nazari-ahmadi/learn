@@ -35,6 +35,11 @@ class Plugin extends PluginBase
                 "label" => 'مدیریت سرویس',
                 "order" => 1
             ],
+          'sepehr.service.access_reports'=>[
+            "tab" => 'سرویس',
+            "label" => 'مدیریت گزارشات',
+            "order" => 2
+          ]
         ];
     }
 
@@ -55,6 +60,13 @@ class Plugin extends PluginBase
                         'permissions' => ['sepehr.service.access_service'],
                         'order' => 300,
                     ],
+                  'reports' => [
+                    'label' => 'گزارش',
+                    'url' => Backend::url('sepehr/service/reports'),
+                    'icon' => 'icon-search',
+                    'permissions' => ['sepehr.service.access_reports'],
+                    'order' => 300,
+                  ],
 
                 ]
             ]
