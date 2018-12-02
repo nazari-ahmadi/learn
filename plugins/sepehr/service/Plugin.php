@@ -3,6 +3,7 @@
 use Backend;
 use Sepehr\Service\Components\PostmanServices;
 use Sepehr\Service\Components\ReferralPostman;
+use Sepehr\Service\Components\Reports;
 use Sepehr\Service\Components\RequestService;
 use Sepehr\Service\Components\ServiceDelivery;
 use Sepehr\Service\Components\ServiceList;
@@ -80,7 +81,8 @@ class Plugin extends PluginBase
             ServiceList::class => 'serviceList',
             ReferralPostman::class => 'referralPostman',
             PostmanServices::class => 'PostmanServices',
-            ServiceDelivery::class => 'ServiceDelivery'
+            ServiceDelivery::class => 'ServiceDelivery',
+            Reports::class=>'reportComponent'
         ];
     }
 
