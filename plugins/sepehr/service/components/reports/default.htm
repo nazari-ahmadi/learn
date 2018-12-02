@@ -82,7 +82,7 @@
             <div class="form-group">
               <label for="weight_id" class="control-label">وزن مرسوله</label>
               <select name="weight_id" id="weight_id" class="form-control">
-                <option value=" ">انتخاب کنید</option>
+                <option value="0">انتخاب کنید</option>
                 {% for item in weight %}
                 <option value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
@@ -95,7 +95,7 @@
             <div class="form-group" id="id_100">
               <label for="post_type_id" class="control-label">نوع ارسال</label>
               <select name="post_type_id" id="post_type_id" class="form-control">
-                <option value=" ">انتخاب کنید</option>
+                <option value="0">انتخاب کنید</option>
                 {% for item in postTypes %}
                 <option value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
@@ -107,7 +107,7 @@
             <div class="form-group">
               <label for="package_type_id"> نوع بسته </label>
               <select name="package_type_id" id="package_type_id" class="form-control">
-                <option value=" ">انتخاب کنید</option>
+                <option value="0">انتخاب کنید</option>
                 {% for item in packageTypes %}
                 <option value="{{ item.id }}"
                         class="form-control">{{ item.name }}
@@ -121,7 +121,7 @@
             <div class="form-group">
               <label for="insurance_type_id" class="control-label">نوع بیمه</label>
               <select name="insurance_type_id" id="insurance_type_id" class="form-control">
-                <option value=" ">انتخاب کنید</option>
+                <option value="0">انتخاب کنید</option>
                 {% for item in insurancesTypes %}
                 <option value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
@@ -134,7 +134,7 @@
             <div class="form-group">
               <label for="distribution_time_id" class="control-label">بازه تحویل بسته پستی</label>
               <select name="distribution_time_id" id="distribution_time_id" class="form-control">
-                <option value=" ">انتخاب کنید</option>
+                <option value="0">انتخاب کنید</option>
                 {% for item in distributionTimes %}
                 <option value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
@@ -147,7 +147,7 @@
             <div class="form-group">
               <label for="special_services_id" class="control-label">خدمات ویژه</label>
               <select name="special_services_id" id="special_services_id" class="form-control">
-                <option value=" ">انتخاب کنید</option>
+                <option value="0">انتخاب کنید</option>
                 {% for item in specialServices %}
                 <option value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
