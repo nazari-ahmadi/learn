@@ -15,6 +15,10 @@ fields:
         label: مشتری
         span: auto
         type: dropdown
+    map:
+        label: 'نقشه'
+        span: full
+        type: MapsForm
 tabs:
     fields:
         packages:

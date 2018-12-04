@@ -1,0 +1,57 @@
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""/>
+<!--  <link rel="stylesheet" href="/css/leaflet.css">-->
+
+</head>
+
+
+<div id="map" style="width: 100%; height: 700px;"></div>
+
+
+<!--<script src="/js/leaflet.js"></script>
+<script src="/js/leaflet-src.js"></script>
+<script src="/js/leaflet-src.esm.js"></script>-->
+
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+        integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+        crossorigin=""></script>
+<script>
+  // var map = L.map('map').setView([35.70163, 51.39211], 12);
+
+  var map = L.map('map').setView([32.867441, 59.21618], 15);
+  L.tileLayer(
+    'https://developers.parsijoo.ir/web-service/v1/map/?type=tile&x={x}&y={y}&z={z}&apikey=627973149c2041b184e31259821d1306', {
+      maxZoom: 21,
+    }).addTo(map);
+  var marker = L.marker([32.867441, 59.21618]).addTo(map);
+
+  var circle = L.circle([32.867441, 59.21618], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 1000
+  }).addTo(map);
+  var marker2 = L.marker([32.877441, 59.21718]).addTo(map);
+
+
+  var popup = L.popup();
+
+  function onMapClick(e) {
+    console.log(e);
+    popup
+      .setLatLng(e.latlng)
+      .setContent("You clicked the map at " + e.latlng.toString())
+      .openOn(map);
+  }
+
+  map.on('click', onMapClick);
+
+</script>
+

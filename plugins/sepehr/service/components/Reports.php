@@ -1,5 +1,6 @@
 <?php namespace Sepehr\Service\Components;
 
+use Auth;
 use Cms\Classes\ComponentBase;
 use DB;
 use Sepehr\Details\Models\DistributionTime;
@@ -60,22 +61,64 @@ class Reports extends ComponentBase
       $weight = null;
     }
 
+    if ($receiver_postal_code != null) {
+      $receiverPostalCode = $receiver_postal_code;
+    } else {
+      $receiverPostalCode = null;
+    }
+
+    if ($receiver_address != null) {
+      $receiverAddress = "$receiver_address";
+    } else {
+      $receiverAddress = null;
+
+    }
+
+    if ($post_type_id != "0") {
+      $postType = "$post_type_id";
+    } else {
+      $postType = null;
+    }
+
+    if ($distribution_time_id != "0") {
+      $distributionTime = "$distribution_time_id";
+    } else {
+      $distributionTime = null;
+    }
+    if ($special_services_id != "0") {
+      $specialServices = "$special_services_id";
+    } else {
+      $specialServices = null;
+    }
+    if ($package_type_id != "0") {
+      $packageType = "$package_type_id";
+    } else {
+      $packageType = null;
+    }
+    if ($insurance_type_id != "0") {
+      $insuranceType = "$insurance_type_id";
+    } else {
+      $insuranceType = null;
+    }
 
 
-    $services = DB::table('sepehr_service_index')
-      /* ->where('sender_postal_code', 'like', "%$sender_postal_code%")
-       ->where('sender_address', 'like', "%$sender_address%")
-       ->where('transaction_code', "$transaction_code")*/
-      ->where('packages', 'like', "%\"weight_id\":$weight%")
-      /* ->where('packages','like',"%\"receiver_postal_code\":\"$receiver_postal_code\"%")
-       ->where('packages','like',"%\"receiver_address\":\"$receiver_address\"%")
-       ->where('packages','like',"%\"post_type_id\":\"$post_type_id\"%")
-       ->where('packages','like',"%\"distribution_time_id\":\"$distribution_time_id\"%")
-       ->where('packages','like',"%\"special_services_id\":\"$special_services_id\"%")
-       ->where('packages','like',"%\"package_type_id\":\"$package_type_id\"%")
-       ->where('packages','like',"%    \"insurance_type_id\":\"$insurance_type_id\"%")*/
+    $user = Auth::getUser()->id;
+    $services = Service::
+    where('user_id', $user)
+      ->where('sender_postal_code', 'like', "%$sender_postal_code%")
+      ->where('sender_address', 'like', "%$sender_address%")
+      ->where('transaction_code','like', "%$transaction_code%")
+      ->where('packages', 'like', "\"weight_id\":$weight%")
+        /*->where('packages', 'like', "%\"receiver_postal_code\":$receiverPostalCode%")
+        ->where('packages', 'like', "%\"receiver_address\":$receiverAddress%")
+        ->where('packages', 'like', "%\"post_type_id\":$postType%")
+        ->where('packages', 'like', "%\"distribution_time_id\":$distributionTime%")
+        ->where('packages', 'like', "%\"special_services_id\":$specialServices%")
+        ->where('packages', 'like', "%\"package_type_id\":$packageType%")
+        ->where('packages', 'like', "\"insurance_type_id\":$insuranceType%") */
       ->get();
     throw new \ApplicationException(json_encode($services));
+    $this->page['result'] = $services;
   }
 
 

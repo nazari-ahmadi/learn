@@ -36,7 +36,7 @@ class Plugin extends PluginBase
     public function registerNavigation()
     {
         return [
-            'main' => [
+            /*'main' => [
                 'label' => 'کیف پول',
                 'url' => Backend::url('sepehr/wallet/wallets'),
 //                'iconSvg' => 'plugins/sepehr/service/assets/images/service.svg',
@@ -52,7 +52,7 @@ class Plugin extends PluginBase
                     ],
 
                 ]
-            ]
+            ]*/
         ];
     }
 
